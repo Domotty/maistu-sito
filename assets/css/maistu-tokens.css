@@ -1,0 +1,22 @@
+:root {
+  /* Colori Maistu (palette Domotty) */
+  --maistu-blu-notte: #0B1A33;     /* fondo principale */
+  --maistu-blu-tessera: #132849;   /* tessera del marchio, superfici */
+  --maistu-blu-scuro: #10223F;     /* pannelli */
+  --maistu-bordo: #23406A;
+  --maistu-arancio: #F7842A;       /* accento: V della M, zig-zag, filo */
+  --maistu-arancio-chiaro: #FFB27A;
+  --maistu-bianco: #F5F7FB;        /* colonne della M, testi su scuro */
+  --maistu-testo-2: #C3CEE0;       /* testo secondario su scuro */
+  --maistu-testo-3: #93A3BE;
+  --maistu-acciaio: #C9D3E3;       /* ago */
+  --maistu-lana: #F2E8D8;          /* fondo caldo per stampa */
+
+  /* Tipografia */
+  --maistu-font: "Poppins", system-ui, sans-serif;            /* nome: 600, spaziatura 0.30em */
+  --maistu-font-mono: "JetBrains Mono", ui-monospace, monospace; /* motto: 400, maiuscolo, 0.24em */
+
+  /* Scala aurea (phi = 1.618) a partire da 16px */
+  --phi: 1.618;
+  --s-1: 6.1px;  --s0: 9.9px;  --s1: 16px;  --s2: 25.9px;  --s3: 41.9px;  --s4: 67.8px;  --s5: 109.7px;
+}

@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maistu</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Maistu è il gestionale su misura di Domotty: ordini, clienti, magazzino, documenti e canali di vendita in un unico sistema, cucito sui processi della tua azienda. Con AI CORE e Jana.">
+<meta name="theme-color" content="#0B1A33">
+<meta property="og:title" content="Maistu · Il gestionale su misura">
+<meta property="og:description" content="Ordini, clienti, magazzino, documenti e canali in un unico sistema, cucito sulla tua azienda. by Domotty.">
+<meta property="og:image" content="https://maistu.it/assets/img/J02-post-social.png">
+<meta property="og:url" content="https://maistu.it/">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
+<link rel="preload" href="assets/fonts/poppins-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<script>
+  // Tema scelto in precedenza (prima del rendering, per evitare lampi).
+  (function () { try { var t = localStorage.getItem('maistu-theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {} document.documentElement.classList.add('js'); })();
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Vai al contenuto</a>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top" aria-label="Maistu, torna all'inizio">
+      <img class="logo-dark" src="assets/img/maistu-logo-orizzontale-scuro.svg" alt="Maistu" width="170" height="60">
+      <img class="logo-light" src="assets/img/maistu-logo-orizzontale-chiaro.svg" alt="Maistu" width="170" height="60">
+    </a>
+    <nav class="links" aria-label="Sezioni">
+      <a href="#nome">Il nome</a>
+      <a href="#moduli">Cosa fa</a>
+      <a href="#demo">Come funziona</a>
+      <a href="#jana">Jana</a>
+      <a href="#metodo">Metodo</a>
+      <a href="#prezzi">Prezzi</a>
+    </nav>
+    <div class="nav-act">
+      <button class="theme" id="theme" type="button" aria-label="Cambia tema chiaro o scuro">
+        <svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></g></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z" fill="currentColor"/></svg>
+      </button>
+      <a class="btn btn-or btn-sm" href="#prova">Prova 15 giorni</a>
+    </div>
+  </div>
+  <div class="nav-thread" aria-hidden="true"><i id="thread"></i></div>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero night" id="top">
+  <canvas class="trama" data-trama="hero" aria-hidden="true"></canvas>
+  <div class="wrap hero-in">
+    <figure class="hero-logo">
+      <div class="k01" id="k01">
+        <img id="k01img" src="assets/img/maistu-intro-K01.svg" alt="Maistu, il gestionale su misura" width="279" height="327">
+      </div>
+      <button class="replay" id="replay" type="button" aria-label="Rivedi l'animazione del marchio">
+        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4.5h4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Rivedi
+      </button>
+    </figure>
+    <div class="hero-copy">
+      <p class="eyebrow hx" style="--d:.2s">Il gestionale su misura · by Domotty</p>
+      <h1 class="hx" style="--d:.45s">Il tuo gestionale,<br><span class="stitch-word">cucito addosso</span>.</h1>
+      <p class="lead hx" style="--d:.7s">Ordini, clienti, magazzino, documenti e canali di vendita in un unico sistema, costruito sui processi della tua azienda. Punto per punto, come lo farebbe un mastro sarto.</p>
+      <div class="cta hx" style="--d:.95s">
+        <a class="btn btn-or" href="#prova">Provalo 15 giorni</a>
+        <a class="btn btn-ghost" href="#demo">Guarda come funziona</a>
+      </div>
+      <ul class="hero-proof hx" style="--d:1.2s">
+        <li><b>1</b> sistema al posto di cinque programmi</li>
+        <li><b>Ogni</b> settore, con moduli su richiesta</li>
+        <li><b>Jana</b> ti risponde a voce</li>
+      </ul>
+    </div>
+  </div>
+  <a class="scroll-cue" href="#nome" aria-label="Scorri alla sezione successiva"><span></span></a>
+</section>
+
+<!-- ============ IL NOME ============ -->
+<section class="sec" id="nome">
+  <div class="wrap two">
+    <div class="rv">
+      <p class="eyebrow">Perché si chiama Maistu</p>
+      <h2>In sardo, <em>maistu</em> è il mastro artigiano.</h2>
+      <p class="pron"><span class="mono">ma·ì·stu</span> <span class="muted">sostantivo, sardo campidanese</span></p>
+      <p>Chi conosce il mestiere, lavora con le mani e fa le cose su misura. E il mastro che più ci somiglia è il sarto.</p>
+      <p>Il sarto non ti vende un abito già fatto. Ti ascolta, prende le misure, sceglie il tessuto e cuce punto dopo punto. Maistu fa lo stesso con la tua azienda: ordini, clienti, magazzino, documenti e canali intrecciati come in un tappeto sardo. Con AI CORE dentro, e Jana sempre pronta ad ascoltarti.</p>
+    </div>
+    <div class="mark-explorer rv">
+      <div class="mark-stage" id="markStage" data-focus="">
+        <img src="assets/img/maistu-marchio.svg" alt="Il marchio Maistu" width="400" height="400" id="markFallback">
+      </div>
+      <p class="mono mini">Tocca un segno per vederlo nel marchio</p>
+      <div class="signs" role="tablist" aria-label="I tre segni del marchio">
+        <button class="sign" role="tab" aria-selected="false" data-sign="punti" type="button">
+          <span class="sign-t">I punti</span>
+          <span class="sign-d">La M è tessuta a punti, come sui telai sardi: 7 punti per colonna, 9 per la V.</span>
+        </button>
+        <button class="sign" role="tab" aria-selected="false" data-sign="ago" type="button">
+          <span class="sign-t">Ago e filo</span>
+          <span class="sign-d">Il mestiere del sarto, tutto fatto su misura. L'ago entra nell'ultimo vertice della cornice.</span>
+        </button>
+        <button class="sign" role="tab" aria-selected="false" data-sign="cornice" type="button">
+          <span class="sign-t">La cornice</span>
+          <span class="sign-d">Lo zig-zag dei bordi dei nostri tappeti, sopra e sotto, a chiudere il lavoro.</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FILOSOFIA ============ -->
+<section class="sec sec-alt" id="filosofia">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="eyebrow">La filosofia</p>
+      <h2>La taglia unica non sta bene a nessuno.</h2>
+      <p class="lead">La maggior parte dei gestionali ti chiede di cambiare il tuo modo di lavorare per entrarci dentro. Noi facciamo il contrario.</p>
+    </div>
+    <div class="fit rv" id="fit" data-mode="maistu">
+      <div class="fit-switch" role="radiogroup" aria-label="Confronta">
+        <button type="button" role="radio" aria-checked="false" data-mode="taglia">Gestionale taglia unica</button>
+        <button type="button" role="radio" aria-checked="true" data-mode="maistu">Maistu su misura</button>
+        <span class="fit-knob" aria-hidden="true"></span>
+      </div>
+      <ul class="fit-rows">
+        <li><span class="fit-k">Come parti</span><span class="fit-v" data-a="Scegli un pacchetto e ti adatti ai suoi campi." data-b="Prima ti ascoltiamo: come lavori, chi fa cosa, dove perdi tempo."></span></li>
+        <li><span class="fit-k">I tuoi dati</span><span class="fit-v" data-a="Ordini in un programma, magazzino in un altro, fatture in un terzo." data-b="Un filo solo: l'ordine scala il magazzino e prepara la fattura da sé."></span></li>
+        <li><span class="fit-k">Le eccezioni</span><span class="fit-v" data-a="Finiscono su un foglio Excel parallelo." data-b="Diventano una regola del sistema, scritta per te."></span></li>
+        <li><span class="fit-k">Quando cresci</span><span class="fit-v" data-a="Cambi software e ricominci da capo." data-b="Aggiungiamo un modulo, come si allarga una cucitura."></span></li>
+        <li><span class="fit-k">Chi ti segue</span><span class="fit-v" data-a="Un ticket e una coda d'attesa." data-b="Persone in Sardegna che conoscono la tua azienda per nome."></span></li>
+      </ul>
+    </div>
+
+    <div class="manifesto">
+      <article class="man rv"><span class="man-n mono">Ascolta</span><h3>Prima si ascolta, poi si cuce.</h3><p>Nessuna riga di codice prima di aver capito come lavori davvero, anche le cose che fai senza pensarci.</p></article>
+      <article class="man rv"><span class="man-n mono">Punto</span><h3>Ogni punto conta.</h3><p>Un campo in più, un passaggio in meno: i dettagli piccoli sono quelli che fanno risparmiare ore ogni settimana.</p></article>
+      <article class="man rv"><span class="man-n mono">Filo</span><h3>Il filo è uno solo.</h3><p>Vendite, magazzino, documenti e clienti sono la stessa storia. Li teniamo insieme, senza copia e incolla.</p></article>
+      <article class="man rv"><span class="man-n mono">Misura</span><h3>L'abito cresce con te.</h3><p>Parti dai moduli che servono oggi. Domani si allarga, si aggiunge, si ritocca.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISION ============ -->
+<section class="sec vision night" id="vision">
+  <div class="loom" id="loom" aria-hidden="true"></div>
+  <div class="wrap vision-in">
+    <p class="eyebrow rv">La visione</p>
+    <h2 class="rv big">Ogni azienda italiana merita uno strumento cucito su di sé, con la cura di una bottega e la forza dell'intelligenza artificiale.</h2>
+    <div class="pillars">
+      <div class="pillar rv"><h3>Artigiani del software</h3><p>Nasce a San Sperate, nel cuore della Sardegna, dove il su misura è ancora un mestiere.</p></div>
+      <div class="pillar rv"><h3>Un sistema, non un collage</h3><p>Tutto quello che fa girare l'azienda in un posto solo, accessibile da ufficio, negozio e telefono.</p></div>
+      <div class="pillar rv"><h3>L'IA che lavora con te</h3><p>AI CORE fa il lavoro ripetitivo. Jana ti risponde quando hai le mani occupate.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="zz" aria-hidden="true"><svg viewBox="0 0 1200 24" preserveAspectRatio="none"><polyline pathLength="1" points="0,4 40,20 80,4 120,20 160,4 200,20 240,4 280,20 320,4 360,20 400,4 440,20 480,4 520,20 560,4 600,20 640,4 680,20 720,4 760,20 800,4 840,20 880,4 920,20 960,4 1000,20 1040,4 1080,20 1120,4 1160,20 1200,4"/></svg></div>
+<!-- ============ MODULI ============ -->
+<section class="sec" id="moduli">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="eyebrow">Cosa fa</p>
+      <h2>Quattro moduli base. Un solo filo che li unisce.</h2>
+      <p class="lead">Sono il punto di partenza. Tutto il resto lo cuciamo su richiesta: ogni modulo che ti serve, costruito sul tuo modo di lavorare. Scegli un modulo e guarda cosa succede quando arriva un ordine.</p>
+    </div>
+    <div class="mods rv">
+      <div class="mod-tabs" role="tablist" aria-label="Moduli">
+        <button role="tab" type="button" aria-selected="true" data-mod="ordini"><span class="mt">Ordini e clienti</span><span class="md">Da ogni canale, in una lista sola</span></button>
+        <button role="tab" type="button" aria-selected="false" data-mod="magazzino"><span class="mt">Magazzino</span><span class="md">Giacenze vere, in tempo reale</span></button>
+        <button role="tab" type="button" aria-selected="false" data-mod="documenti"><span class="mt">Documenti e fatture</span><span class="md">Fattura elettronica e DDT da soli</span></button>
+        <button role="tab" type="button" aria-selected="false" data-mod="canali"><span class="mt">Canali di vendita</span><span class="md">Negozio, sito, marketplace, WhatsApp</span></button>
+      </div>
+      <div class="mod-view win" aria-live="polite">
+        <div class="win-bar"><i></i><i></i><i></i><span class="mono" id="modUrl">app.maistu.it · ordini</span></div>
+        <div class="mod-body" id="modBody"></div>
+      </div>
+    </div>
+    <div class="flow rv" aria-label="Il filo: cosa succede a un ordine">
+      <span class="flow-step">Ordine dal sito</span><span class="flow-arrow" aria-hidden="true"></span>
+      <span class="flow-step">Magazzino scalato</span><span class="flow-arrow" aria-hidden="true"></span>
+      <span class="flow-step">DDT e fattura pronti</span><span class="flow-arrow" aria-hidden="true"></span>
+      <span class="flow-step">Cliente avvisato su WhatsApp</span>
+    </div>
+    <div class="ondemand rv">
+      <div class="od-stitch" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+      <div><h3>E poi i moduli che non esistono ancora.</h3><p>Preventivi a più livelli, gestione delle commesse, noleggi, abbonamenti, produzione, tracciabilità dei lotti: se lo fai in azienda, possiamo cucirlo dentro Maistu.</p></div>
+      <a class="btn btn-ghost" href="#contatti" data-tipo="Modulo su misura">Chiedi un modulo</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEMO ============ -->
+<section class="sec sec-alt" id="demo">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="eyebrow">Come funziona</p>
+      <h2>Guarda Maistu cambiare abito, settore per settore.</h2>
+      <p class="lead">Una simulazione per capire la logica: scegli un settore e menu, moduli e dati si adattano. Crea un ordine, guarda il magazzino scalare, chiedi qualcosa a Jana. La prova vera, con il tuo nome e i tuoi canali, la prepariamo noi.</p>
+    </div>
+
+    <div class="tailor rv" id="tailor">
+      <div class="tailor-form">
+        <p class="step-l mono">Settore</p>
+        <div class="sectors" id="sectors" role="radiogroup" aria-label="Settore"></div>
+        <label class="step-l mono" for="bizName">Nome dell'azienda</label>
+        <input id="bizName" type="text" maxlength="40" placeholder="Es. Bar Centrale" autocomplete="organization">
+        <button class="btn btn-ghost btn-wide" id="buildDemo" type="button">Cuci la simulazione</button>
+        <p class="tiny muted">Simulazione con dati inventati, salvata solo nel tuo browser.</p>
+        <div class="sim-cta">
+          <p><b>Ti convince?</b> Prepariamo un Maistu vero per la tua azienda, da provare per 15 giorni.</p>
+          <a class="btn btn-or btn-wide" href="#prova">Richiedi la prova</a>
+        </div>
+      </div>
+      <div class="tailor-out">
+        <div class="sewing" id="sewing" hidden>
+          <svg viewBox="0 0 220 40" width="220" height="40" aria-hidden="true"><path class="sew-line" d="M6 20 H214" /></svg>
+          <p class="mono" id="sewMsg">Prendo le misure…</p>
+        </div>
+        <div class="app win" id="app">
+          <div class="win-bar"><i></i><i></i><i></i><span class="mono" id="appUrl">simulazione.maistu.it</span><span class="sim-tag mono">Simulazione</span><button class="app-reset" id="appReset" type="button">Ricomincia</button></div>
+          <div class="app-in">
+            <aside class="app-side" id="appSide" aria-label="Menu della demo"></aside>
+            <div class="app-main">
+              <div class="app-top"><div><p class="app-co" id="appCo">Bar Centrale</p><p class="app-sub mono" id="appSub">Ristorazione · demo</p></div><button class="btn btn-or btn-sm" id="appNew" type="button">+ Nuovo ordine</button></div>
+              <div class="app-view" id="appView"></div>
+              <form class="jana-bar" id="janaBar" autocomplete="off">
+                <span class="jana-dot" aria-hidden="true"></span>
+                <label class="sr" for="janaIn">Chiedi a Jana</label>
+                <input id="janaIn" type="text" placeholder="Jana, cosa è sotto scorta?">
+                <button type="submit" aria-label="Invia a Jana"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </form>
+              <p class="jana-out" id="janaOut" aria-live="polite"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AI CORE + JANA ============ -->
+<section class="sec night jana-sec" id="jana">
+  <canvas class="trama" data-trama="jana" aria-hidden="true"></canvas>
+  <div class="wrap two">
+    <div class="rv">
+      <p class="eyebrow">AI CORE e Jana</p>
+      <h2>Un'intelligenza che conosce la tua azienda. E una voce che ti risponde.</h2>
+      <p><b>AI CORE</b> è il motore dentro Maistu: legge email e ordini, aggiorna le schede, prepara documenti e ti avvisa quando qualcosa non torna. Lavora sui tuoi dati, non su risposte generiche.</p>
+      <p><b>Jana</b> è il comando vocale. Le parli mentre sei al banco, in magazzino o in macchina, e lei fa.</p>
+      <ul class="ticks">
+        <li>Smista email e richieste e le collega al cliente giusto</li>
+        <li>Prepara preventivi e solleciti dalle tue regole</li>
+        <li>Ti avvisa prima che un prodotto finisca</li>
+        <li>Riassume la giornata ogni mattina</li>
+      </ul>
+    </div>
+    <div class="phone-wrap rv">
+      <div class="phone">
+        <div class="ph-head"><span class="jana-orb" id="orb" aria-hidden="true"><i></i><i></i><i></i></span><div><p class="ph-name">Jana</p><p class="ph-st mono" id="janaState">In ascolto</p></div></div>
+        <div class="chat" id="chat" aria-live="polite">
+          <p class="msg in">Buongiorno! Sto preparando la tua giornata.</p>
+        </div>
+        <div class="chips" id="janaChips">
+          <button type="button" class="chip">Jana, com'è andata ieri?</button>
+          <button type="button" class="chip">Jana, ordina altro caffè</button>
+          <button type="button" class="chip">Jana, chi deve ancora pagare?</button>
+          <button type="button" class="chip">Jana, prepara il preventivo per Rossi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="zz" aria-hidden="true"><svg viewBox="0 0 1200 24" preserveAspectRatio="none"><polyline pathLength="1" points="0,4 40,20 80,4 120,20 160,4 200,20 240,4 280,20 320,4 360,20 400,4 440,20 480,4 520,20 560,4 600,20 640,4 680,20 720,4 760,20 800,4 840,20 880,4 920,20 960,4 1000,20 1040,4 1080,20 1120,4 1160,20 1200,4"/></svg></div>
+<!-- ============ SETTORI ============ -->
+<section class="sec" id="settori">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="eyebrow">Per ogni settore</p>
+      <h2>Stesso mastro, abiti diversi.</h2>
+      <p class="lead">Ai moduli base aggiungiamo quelli del tuo mestiere. Qui ne vedi sette, ma sono solo esempi: Maistu si cuce su qualsiasi attività.</p>
+    </div>
+    <div class="sect-grid" id="sectGrid"></div>
+    <div class="more-sect rv">
+      <p class="mono">E ancora, solo per citarne alcuni</p>
+      <ul class="cloud" id="cloud"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ METODO ============ -->
+<section class="sec sec-alt" id="metodo">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="eyebrow">Come lavoriamo</p>
+      <h2>Cinque passaggi, come in sartoria.</h2>
+    </div>
+    <div class="method-wrap" id="method">
+    <svg class="method-thread" viewBox="0 0 10 100" preserveAspectRatio="none" aria-hidden="true"><path class="mt-base" d="M5 0 V100"/><path class="mt-sew" d="M5 0 V100" pathLength="1"/></svg>
+    <ol class="method">
+      <li class="mstep rv"><span class="mnum">1</span><div><h3>Ascolto</h3><p>Veniamo da te o ci sentiamo in video. Ci racconti come lavori, cosa ti fa perdere tempo e cosa non vuoi cambiare.</p><span class="mono mtime">Prima settimana</span></div></li>
+      <li class="mstep rv"><span class="mnum">2</span><div><h3>Misure</h3><p>Mappiamo processi, documenti e numeri veri. Ne esce un cartamodello: cosa fa Maistu, per chi e in che ordine.</p><span class="mono mtime">1–2 settimane</span></div></li>
+      <li class="mstep rv"><span class="mnum">3</span><div><h3>Tessuto</h3><p>Scegliamo i moduli base e quelli del tuo settore, e decidiamo cosa portare dentro dai programmi che usi oggi.</p><span class="mono mtime">Insieme a te</span></div></li>
+      <li class="mstep rv"><span class="mnum">4</span><div><h3>Cucitura</h3><p>Configuriamo e sviluppiamo quello che serve, importiamo i dati e colleghiamo canali e fatturazione elettronica.</p><span class="mono mtime">Secondo il progetto</span></div></li>
+      <li class="mstep rv"><span class="mnum">5</span><div><h3>Prova</h3><p>Lo usi per davvero, con noi accanto. Ritocchiamo finché non ti calza. Poi restiamo, per la manutenzione e per i ritocchi di domani.</p><span class="mono mtime">E dopo, sempre</span></div></li>
+    </ol>
+    </div>
+  </div>
+</section>
+
+<div class="zz" aria-hidden="true"><svg viewBox="0 0 1200 24" preserveAspectRatio="none"><polyline pathLength="1" points="0,4 40,20 80,4 120,20 160,4 200,20 240,4 280,20 320,4 360,20 400,4 440,20 480,4 520,20 560,4 600,20 640,4 680,20 720,4 760,20 800,4 840,20 880,4 920,20 960,4 1000,20 1040,4 1080,20 1120,4 1160,20 1200,4"/></svg></div>
+<!-- ============ PREZZI ============ -->
+<section class="sec" id="prezzi">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="eyebrow">Piani e prezzi</p>
+      <h2>Paghi la misura che ti serve.</h2>
+      <p class="lead">Scegli la dimensione della tua azienda: ti indichiamo il piano giusto. Poi indica quante persone lo useranno e guarda il conto.</p>
+    </div>
+
+    <div class="calc rv" id="calc">
+      <div class="calc-ctl">
+        <div class="seg" role="radiogroup" aria-label="Fatturazione" id="billing">
+          <button type="button" role="radio" aria-checked="true" data-bill="m">Mensile</button>
+          <button type="button" role="radio" aria-checked="false" data-bill="y">Annuale <span class="save">2 mesi gratis</span></button>
+        </div>
+        <div class="ctl">
+          <label for="users">Persone che usano Maistu</label>
+          <div class="range-row"><input type="range" id="users" min="1" max="51" value="6"><output id="usersOut" class="mono">6</output></div>
+        </div>
+        <div class="ctl">
+          <span class="ctl-l" id="sizeL">Dimensione dell'azienda</span>
+          <div class="seg seg-4" role="radiogroup" aria-labelledby="sizeL" id="size">
+            <button type="button" role="radio" aria-checked="true" data-size="micro">Micro<small>fino a 9 addetti</small></button>
+            <button type="button" role="radio" aria-checked="false" data-size="piccola">Piccola<small>10–49</small></button>
+            <button type="button" role="radio" aria-checked="false" data-size="media">Media<small>50–249</small></button>
+            <button type="button" role="radio" aria-checked="false" data-size="grande">Grande<small>250+</small></button>
+          </div>
+        </div>
+      </div>
+      <div class="quote" id="quote" hidden>
+        <div><p class="eyebrow">Su quotazione</p><h3 id="quoteT">Per un'azienda della tua dimensione prepariamo un'offerta dedicata.</h3><p>Oltre 50 utenti o 250 addetti servono configurazioni, sedi e assistenza pensate apposta. Un nostro commerciale ti prepara la quotazione.</p></div>
+        <a class="btn btn-or" href="#contatti" data-tipo="Preventivo Enterprise">Richiedi la quotazione</a>
+      </div>
+      <div class="plans" id="plans"></div>
+      <p class="tiny muted plans-note">Prezzi IVA esclusa. Con la fatturazione annuale paghi 10 mesi su 12.</p>
+    </div>
+
+    <div class="addons rv">
+      <div class="addons-head">
+        <h3>Moduli aggiuntivi</h3>
+        <p class="muted">Aggiungili al piano scelto: il totale si aggiorna qui sopra. Questi sono i più richiesti, gli altri li costruiamo su misura.</p>
+      </div>
+      <div class="addon-list" id="addons"></div>
+    </div>
+
+    <div class="enterprise rv">
+      <div>
+        <p class="eyebrow">Enterprise e licenza completa</p>
+        <h3>Più sedi, server tuoi, o una licenza una tantum?</h3>
+        <p>Per gruppi con più società, installazione nei tuoi server o licenza perpetua del gestionale completo, prepariamo un'offerta su misura con un nostro commerciale.</p>
+      </div>
+      <a class="btn btn-or" href="#contatti" data-tipo="Preventivo Enterprise">Parla con un commerciale</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROVA 15 GIORNI ============ -->
+<section class="sec night prova" id="prova">
+  <canvas class="trama" data-trama="prova" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="head rv">
+      <p class="eyebrow">La prova vera</p>
+      <h2>Il tuo Maistu, in prova per 15 giorni.</h2>
+      <p class="lead">Quando ci chiedi la demo, non ti diamo un account generico. Prepariamo un ambiente il più vicino possibile al tuo settore e al tuo modo di lavorare, e te lo lasciamo provare per due settimane, con noi accanto.</p>
+    </div>
+    <div class="days rv" id="days" aria-hidden="true">
+      <div class="days-row"></div>
+      <div class="days-labels"><span>Giorno 1<br><b>Accesso e primi passi</b></span><span>A metà<br><b>Facciamo il punto</b></span><span>Giorno 15<br><b>Decidi tu</b></span></div>
+    </div>
+    <ol class="trial">
+      <li class="rv"><span class="t-n">1</span><h3>Richiedi la prova</h3><p>Compila il modulo qui sotto: settore, quante persone siete, cosa usate oggi.</p></li>
+      <li class="rv"><span class="t-n">2</span><h3>Ricevi la nostra email</h3><p>Ti scriviamo cosa ci serve per prepararla (qualche prodotto, un listino, il logo, un esempio dei tuoi documenti) e come possiamo aiutarti a raccoglierlo.</p></li>
+      <li class="rv"><span class="t-n">3</span><h3>Cuciamo il tuo ambiente</h3><p>Un Maistu con il tuo nome, i moduli del tuo settore e dati che somigliano ai tuoi. Non una vetrina: un gestionale da usare.</p></li>
+      <li class="rv"><span class="t-n">4</span><h3>Colleghiamo i canali</h3><p>Se vuoi, attiviamo sulla demo anche WhatsApp, email, un numero di telefono o il centralino, il sito o un marketplace, per provarlo come nella realtà.</p></li>
+      <li class="rv"><span class="t-n">5</span><h3>Provi, poi decidi</h3><p>Quindici giorni per metterlo alla prova, con il nostro supporto. Alla fine decidi tu se proseguire. Se non prosegui, l'ambiente viene cancellato.</p></li>
+    </ol>
+    <div class="prova-cta rv"><a class="btn btn-or" href="#contatti" data-tipo="Prova Maistu 15 giorni">Richiedi la prova di 15 giorni</a><span class="muted">Nessun impegno: ti ricontattiamo noi.</span></div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="sec sec-alt" id="faq">
+  <div class="wrap narrow">
+    <div class="head rv"><p class="eyebrow">Domande frequenti</p><h2>Quello che ci chiedono prima di iniziare.</h2></div>
+    <div class="faq rv">
+      <details><summary>Posso portare dentro i dati che ho già?</summary><p>Sì. Importiamo clienti, prodotti, listini e storico da fogli Excel e dai gestionali più diffusi. Lo facciamo noi, durante la fase di cucitura.</p></details>
+      <details><summary>Fa la fattura elettronica?</summary><p>Sì. Maistu emette fatture elettroniche e note di credito, le invia allo SDI e ne segue lo stato. Puoi anche condividerle con il tuo commercialista.</p></details>
+      <details><summary>Dove stanno i miei dati?</summary><p>Nella versione cloud, su server in Unione Europea, con backup giornalieri. Con la licenza completa puoi installarlo anche nei tuoi server.</p></details>
+      <details><summary>Posso partire piccolo?</summary><p>Certo. Molti clienti partono con ordini e magazzino e aggiungono documenti, canali o Jana nei mesi successivi.</p></details>
+      <details><summary>Funziona dal telefono?</summary><p>Sì, da browser su computer, tablet e telefono. Per chi lavora fuori sede c'è anche l'app con le funzioni che servono in giro.</p></details>
+      <details><summary>Chi mi aiuta se qualcosa non va?</summary><p>Il team Domotty, da San Sperate. Al telefono, su WhatsApp o per email, con persone che conoscono il tuo progetto.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTATTI ============ -->
+<section class="sec night contact" id="contatti">
+  <canvas class="trama" data-trama="contatti" aria-hidden="true"></canvas>
+  <div class="wrap two">
+    <div class="rv">
+      <p class="eyebrow">Parliamone</p>
+      <h2>Prendiamo le misure insieme?</h2>
+      <p class="lead">Richiedi la prova di 15 giorni o raccontaci semplicemente della tua azienda. Ti rispondiamo con un'email e fissiamo un primo incontro.</p>
+      <ul class="contact-list">
+        <li><span class="mono">Telefono</span><a href="tel:+390706270231">070 627 0231</a></li>
+        <li><span class="mono">WhatsApp</span><a href="https://wa.me/393202812627" target="_blank" rel="noopener">Scrivici su WhatsApp</a></li>
+        <li><span class="mono">Email</span><a href="mailto:assistenza@domotty.it">assistenza@domotty.it</a></li>
+      </ul>
+    </div>
+    <form class="form rv" id="contactForm" novalidate>
+      <div class="f-row">
+        <label for="f-tipo">Cosa ti serve</label>
+        <select id="f-tipo" name="tipo">
+          <option>Prova Maistu 15 giorni</option>
+          <option>Preventivo piani cloud</option>
+          <option>Modulo su misura</option>
+          <option>Preventivo Enterprise</option>
+          <option>Informazioni generali</option>
+        </select>
+      </div>
+      <div class="f-2">
+        <div class="f-row"><label for="f-nome">Nome e cognome</label><input id="f-nome" name="nome" required autocomplete="name"></div>
+        <div class="f-row"><label for="f-azienda">Azienda</label><input id="f-azienda" name="azienda" autocomplete="organization"></div>
+      </div>
+      <div class="f-row"><label for="f-settore">Settore</label><select id="f-settore" name="settore"></select></div>
+      <div class="f-2">
+        <div class="f-row"><label for="f-email">Email</label><input id="f-email" name="email" type="email" required autocomplete="email"></div>
+        <div class="f-row"><label for="f-tel">Telefono</label><input id="f-tel" name="telefono" type="tel" autocomplete="tel"></div>
+      </div>
+      <div class="f-row"><label for="f-msg">Di cosa vi occupate?</label><textarea id="f-msg" name="messaggio" rows="4" placeholder="Settore, quante persone, cosa usate oggi…"></textarea></div>
+      <div class="hp" aria-hidden="true"><label for="f-web">Sito web</label><input id="f-web" name="website" tabindex="-1" autocomplete="off"></div>
+      <label class="check"><input type="checkbox" id="f-privacy" required> <span>Ho letto l'<a href="privacy.html">informativa privacy</a> e acconsento a essere ricontattato.</span></label>
+      <button class="btn btn-or btn-wide" type="submit" id="f-send">Invia la richiesta</button>
+      <p class="f-msg" id="f-out" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="foot night">
+  <div class="wrap foot-in">
+    <div class="foot-brand">
+      <img src="assets/img/maistu-logo-orizzontale-scuro.svg" alt="Maistu" width="200" height="71">
+      <p class="muted">Il gestionale su misura di Domotty S.r.l.</p>
+    </div>
+    <form class="nl" id="nlForm" novalidate>
+      <label for="nl-email">Novità su Maistu, poche e utili</label>
+      <div class="nl-row"><input id="nl-email" type="email" placeholder="La tua email" autocomplete="email"><button class="btn btn-or btn-sm" type="submit">Iscriviti</button></div>
+      <div class="hp" aria-hidden="true"><input id="nl-web" tabindex="-1" autocomplete="off"></div>
+      <p class="tiny muted" id="nl-out" role="status" aria-live="polite">Ti mandiamo un'email per confermare. Puoi disiscriverti quando vuoi.</p>
+    </form>
+    <div class="foot-cols">
+      <div><p class="mono">Domotty S.r.l.</p><p>Via Monsignor Cherchi 26<br>09027 San Sperate (CA)<br>P.IVA 04208000929</p></div>
+      <div><p class="mono">Contatti</p><p>070 627 0231<br>assistenza@domotty.it<br>PEC domottysrl@legalmail.it</p></div>
+      <div><p class="mono">Seguici</p><p><a href="https://www.instagram.com/domotty_italia" target="_blank" rel="noopener">Instagram</a><br><a href="https://www.facebook.com/profile.php?id=61586414318326" target="_blank" rel="noopener">Facebook</a><br><a href="https://domotty.it" target="_blank" rel="noopener">domotty.it</a></p></div>
+    </div>
+    <div class="foot-legal"><span>© 2026 Domotty S.r.l.</span><a href="privacy.html">Privacy</a><a href="cookie.html">Cookie</a></div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/sew-intro.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
