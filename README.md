@@ -13,6 +13,8 @@ assets/img, assets/fonts  marchio Maistu, Poppins e JetBrains Mono (licenza OFL)
 
 ## Stato
 
+Repository: `Domotty/maistu-sito`. Sito di prova: https://domotty.github.io/maistu-sito/
+
 Versione di prova. I moduli (richiesta prova e newsletter) inviano davvero solo da `maistu.it`;
 altrove l'invio è simulato. Prima della messa online servono:
 
