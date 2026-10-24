@@ -75,7 +75,7 @@
       <ul class="hero-proof hx" style="--d:1.2s">
         <li><b>1</b> sistema al posto di cinque programmi</li>
         <li><b>Ogni</b> settore, con moduli su richiesta</li>
-        <li><b>Jana</b> ti risponde a voce</li>
+        <li><b>Jana</b>, l'assistente AI che ti risponde</li>
       </ul>
     </div>
   </div>
@@ -231,7 +231,7 @@
               <div class="app-top"><div><p class="app-co" id="appCo">Bar Centrale</p><p class="app-sub mono" id="appSub">Ristorazione · demo</p></div><button class="btn btn-or btn-sm" id="appNew" type="button">+ Nuovo ordine</button></div>
               <div class="app-view" id="appView"></div>
               <form class="jana-bar" id="janaBar" autocomplete="off">
-                <span class="jana-dot" aria-hidden="true"></span>
+                <img class="jana-ic" src="assets/img/jana/jana-icona.svg" alt="" width="26" height="26">
                 <label class="sr" for="janaIn">Chiedi a Jana</label>
                 <input id="janaIn" type="text" placeholder="Jana, cosa è sotto scorta?">
                 <button type="submit" aria-label="Invia a Jana"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -245,33 +245,66 @@
   </div>
 </section>
 
-<!-- ============ AI CORE + JANA ============ -->
+<!-- ============ JANA, ASSISTENTE AI ============ -->
 <section class="sec night jana-sec" id="jana">
   <canvas class="trama" data-trama="jana" aria-hidden="true"></canvas>
-  <div class="wrap two">
-    <div class="rv">
-      <p class="eyebrow">AI CORE e Jana</p>
-      <h2>Un'intelligenza che conosce la tua azienda. E una voce che ti risponde.</h2>
-      <p><b>AI CORE</b> è il motore dentro Maistu: legge email e ordini, aggiorna le schede, prepara documenti e ti avvisa quando qualcosa non torna. Lavora sui tuoi dati, non su risposte generiche.</p>
-      <p><b>Jana</b> è il comando vocale. Le parli mentre sei al banco, in magazzino o in macchina, e lei fa.</p>
-      <ul class="ticks">
-        <li>Smista email e richieste e le collega al cliente giusto</li>
-        <li>Prepara preventivi e solleciti dalle tue regole</li>
-        <li>Ti avvisa prima che un prodotto finisca</li>
-        <li>Riassume la giornata ogni mattina</li>
-      </ul>
+  <div class="wrap">
+    <div class="jana-intro">
+      <div class="rv">
+        <p class="eyebrow">L'assistente AI di Domotty</p>
+        <h2 class="jana-title">Ti presento <span>Jana</span>.</h2>
+        <p class="lead">Jana è la nostra assistente AI. Le parli o le scrivi come a una collega: risponde, cerca, prepara e fa, dentro Maistu e, con la domotica Domotty, anche tra le mura del tuo negozio, del tuo ufficio o di casa.</p>
+      </div>
+      <figure class="jana-mark rv" id="janaMark" aria-label="Il simbolo di Jana">
+        <img src="assets/img/jana/jana-simbolo-per-fondi-scuri.svg" alt="Il simbolo di Jana" width="152" height="152">
+      </figure>
     </div>
-    <div class="phone-wrap rv">
-      <div class="phone">
-        <div class="ph-head"><span class="jana-orb" id="orb" aria-hidden="true"><i></i><i></i><i></i></span><div><p class="ph-name">Jana</p><p class="ph-st mono" id="janaState">In ascolto</p></div></div>
-        <div class="chat" id="chat" aria-live="polite">
-          <p class="msg in">Buongiorno! Sto preparando la tua giornata.</p>
+
+    <div class="jana-name rv">
+      <img src="assets/img/jana/jana-icona.svg" alt="" width="64" height="64">
+      <div>
+        <p class="pron"><span class="mono">jà·na</span> <span class="muted">sostantivo, sardo</span></p>
+        <p>Nel folklore sardo la <em>jana</em> è una fata: una piccola creatura magica e, in alcune tradizioni, una strega dei boschi. Le <em>domus de janas</em>, le "case delle fate" scavate nella roccia, portano il suo nome. Ci piaceva l'idea di una presenza piccola e discreta che lavora per te, e fa sembrare semplici le cose difficili.</p>
+      </div>
+    </div>
+
+    <div class="two jana-body">
+      <div class="rv">
+        <h3 class="jana-h3">Cosa farà Jana</h3>
+        <div class="jana-cols">
+          <div>
+            <p class="mono jana-k">In Maistu</p>
+            <ul class="ticks">
+              <li>Ti dice com'è andata la giornata, a voce o per iscritto</li>
+              <li>Crea ordini, preventivi e solleciti dalle tue regole</li>
+              <li>Ti avvisa prima che un prodotto finisca, e lo riordina</li>
+              <li>Smista email e messaggi e li collega al cliente giusto</li>
+            </ul>
+          </div>
+          <div>
+            <p class="mono jana-k">Tra le tue mura</p>
+            <ul class="ticks">
+              <li>Accende luci e clima, apre e chiude tapparelle</li>
+              <li>Avvia gli scenari: apertura, chiusura, notte</li>
+              <li>Attiva l'allarme e ti avvisa se qualcosa non va</li>
+              <li>Ti risponde anche quando hai le mani occupate</li>
+            </ul>
+          </div>
         </div>
-        <div class="chips" id="janaChips">
-          <button type="button" class="chip">Jana, com'è andata ieri?</button>
-          <button type="button" class="chip">Jana, ordina altro caffè</button>
-          <button type="button" class="chip">Jana, chi deve ancora pagare?</button>
-          <button type="button" class="chip">Jana, prepara il preventivo per Rossi</button>
+        <p class="jana-core"><b>Dietro Jana c'è AI CORE</b>, il motore di intelligenza artificiale di Maistu: lavora sui dati della tua azienda, non su risposte generiche, e fa da solo il lavoro ripetitivo.</p>
+      </div>
+      <div class="phone-wrap rv">
+        <div class="phone">
+          <div class="ph-head"><span class="jana-av" id="orb"><img src="assets/img/jana/jana-icona.svg" alt="" width="44" height="44"></span><div><p class="ph-name">Jana</p><p class="ph-st mono" id="janaState">In ascolto</p></div></div>
+          <div class="chat" id="chat" aria-live="polite">
+            <p class="msg in">Buongiorno! Sto preparando la tua giornata.</p>
+          </div>
+          <div class="chips" id="janaChips">
+            <button type="button" class="chip">Jana, com'è andata ieri?</button>
+            <button type="button" class="chip">Jana, ordina altro caffè</button>
+            <button type="button" class="chip">Jana, chi deve ancora pagare?</button>
+            <button type="button" class="chip">Jana, chiudi il negozio</button>
+          </div>
         </div>
       </div>
     </div>
@@ -406,6 +439,7 @@
       <details><summary>Dove stanno i miei dati?</summary><p>Nella versione cloud, su server in Unione Europea, con backup giornalieri. Con la licenza completa puoi installarlo anche nei tuoi server.</p></details>
       <details><summary>Posso partire piccolo?</summary><p>Certo. Molti clienti partono con ordini e magazzino e aggiungono documenti, canali o Jana nei mesi successivi.</p></details>
       <details><summary>Funziona dal telefono?</summary><p>Sì, da browser su computer, tablet e telefono. Per chi lavora fuori sede c'è anche l'app con le funzioni che servono in giro.</p></details>
+      <details><summary>Chi è Jana?</summary><p>È l'assistente AI di Domotty. In Maistu risponde alle tue domande e svolge compiti al posto tuo, a voce o per iscritto. Con la domotica Domotty comanda anche luci, clima, scenari e sicurezza. Il nome viene dal sardo: la <em>jana</em> è la fata del folklore isolano.</p></details>
       <details><summary>Chi mi aiuta se qualcosa non va?</summary><p>Il team Domotty, da San Sperate. Al telefono, su WhatsApp o per email, con persone che conoscono il tuo progetto.</p></details>
     </div>
   </div>

@@ -595,13 +595,34 @@
     render();
   }
 
+  /* ================= simbolo di Jana: i punti si accendono a onde dal centro ================= */
+  var janaMark = $('#janaMark');
+  if (janaMark && window.fetch) {
+    fetch('assets/img/jana/jana-simbolo-per-fondi-scuri.svg').then(function (r) { return r.ok ? r.text() : Promise.reject(); }).then(function (txt) {
+      var tmp = doc.createElement('div'); tmp.innerHTML = txt;
+      var svg = tmp.querySelector('svg'); if (!svg) return;
+      svg.removeAttribute('width'); svg.removeAttribute('height');
+      svg.setAttribute('aria-hidden', 'true');
+      Array.prototype.forEach.call(svg.children, function (el) {
+        var cx = +(el.getAttribute('cx') || 100), cy = +(el.getAttribute('cy') || 100);
+        el.setAttribute('class', 'jd');
+        el.style.setProperty('--r', String(Math.round((Math.abs(cx - 100) + Math.abs(cy - 100)) / 13)));
+      });
+      janaMark.innerHTML = ''; janaMark.appendChild(svg);
+      var go = function () { janaMark.classList.add('on'); setTimeout(function () { if (!reduce) janaMark.classList.add('live'); }, 1400); };
+      if (reduce || !('IntersectionObserver' in window)) go();
+      else { var jo = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { go(); jo.disconnect(); } }, { threshold: 0.3 }); jo.observe(janaMark); }
+    }).catch(function () {});
+  }
+
   /* ================= Jana (telefono) ================= */
   var chat = $('#chat'), chips = $('#janaChips'), orb = $('#orb'), jState = $('#janaState');
   var SCRIPT = {
     "Jana, com'è andata ieri?": 'Ieri 64 ordini e € 2.380 di incasso, il 12% in più di martedì scorso. Il prodotto più venduto è stato il cappuccino.',
     'Jana, ordina altro caffè': 'Fatto. Ho chiesto 10 kg di caffè in grani a Torrefazione Isola, consegna prevista giovedì. Ho aggiornato il magazzino.',
     'Jana, chi deve ancora pagare?': 'Tre fatture scadute: Hotel Sa Perda (€ 2.105), Circolo Tennis (€ 340) e Studio Fenu (€ 120). Vuoi che mandi un sollecito gentile?',
-    'Jana, prepara il preventivo per Rossi': 'Pronto: catering per 40 persone, € 1.180 IVA inclusa, dai prezzi dell\'ultimo evento. Te lo mando su WhatsApp per controllarlo?'
+    'Jana, prepara il preventivo per Rossi': 'Pronto: catering per 40 persone, € 1.180 IVA inclusa, dai prezzi dell\'ultimo evento. Te lo mando su WhatsApp per controllarlo?',
+    'Jana, chiudi il negozio': 'Fatto: luci spente, tapparelle abbassate, clima in modalità notte e allarme attivo. La cassa di oggi è chiusa a € 2.140. Buona serata!'
   };
   function bubble(cls, html) { var p = doc.createElement('p'); p.className = 'msg ' + cls; p.innerHTML = html; chat.appendChild(p); chat.scrollTop = chat.scrollHeight; return p; }
   if (chips) chips.addEventListener('click', function (e) {
@@ -611,9 +632,11 @@
     if (jState) jState.textContent = 'Sto lavorando';
     var ty = bubble('in typing', '<i></i><i></i><i></i>');
     if (orb) orb.classList.add('talk');
+    if (janaMark) janaMark.classList.add('talk');
     setTimeout(function () {
       ty.remove(); bubble('in', SCRIPT[q] || 'Ci penso io.');
       if (orb) orb.classList.remove('talk');
+      if (janaMark) janaMark.classList.remove('talk');
       if (jState) jState.textContent = 'In ascolto';
     }, reduce ? 50 : 1100);
   });

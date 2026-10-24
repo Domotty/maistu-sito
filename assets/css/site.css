@@ -385,6 +385,37 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--or);box-
 .chip:hover{border-color:var(--or);color:var(--fg)}
 .chip:disabled{opacity:.45;cursor:default}
 
+/* ---------- Jana ---------- */
+.jana-intro{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:var(--s3);align-items:center}
+.jana-title{font-size:clamp(40px,5.6vw,72px);margin-block:var(--s1) var(--s2)}
+.jana-title span{color:var(--or)}
+.jana-mark{margin:0;justify-self:center;width:min(300px,70vw);aspect-ratio:1}
+.jana-mark img,.jana-mark svg{width:100%;height:100%;display:block;overflow:visible}
+.jana-mark .jd{transform-box:fill-box;transform-origin:center;opacity:0;transform:scale(.2);transition:opacity .5s ease,transform .6s cubic-bezier(.3,1.7,.5,1);transition-delay:calc(var(--r,0) * 110ms)}
+.jana-mark.on .jd{opacity:1;transform:none}
+.jana-mark.live .jd{animation:jwave 3.4s ease-in-out infinite;animation-delay:calc(var(--r,0) * .22s)}
+.jana-mark.talk .jd{animation-duration:1.1s;animation-delay:calc(var(--r,0) * .08s)}
+@keyframes jwave{0%,100%{opacity:1;transform:none}50%{opacity:.4;transform:scale(.82)}}
+.jana-name{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--s2);align-items:start;margin-top:var(--s3);padding:var(--s2) var(--s3);border:1px solid var(--b1);border-radius:var(--r-l);background:color-mix(in srgb,var(--sf1) 80%,transparent);max-width:880px}
+.jana-name img{width:64px;height:64px;border-radius:16px}
+.jana-name .pron{margin:0 0 6px}
+.jana-name p:not(.pron){color:var(--t2);max-width:66ch}
+.jana-body{margin-top:var(--s4);align-items:start}
+.jana-h3{font-size:clamp(22px,2.4vw,30px);margin-bottom:var(--s2)}
+.jana-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s2)}
+.jana-k{color:var(--or-tx);font-size:11px;margin-bottom:10px}
+.jana-cols .ticks{margin:0}
+.jana-cols .ticks li{font-size:15px}
+.jana-core{margin-top:var(--s3);color:var(--t2);padding-left:var(--s1);border-left:3px solid var(--or);max-width:62ch}
+.jana-core b{color:var(--fg)}
+.jana-av{position:relative;width:44px;height:44px;flex:none;border-radius:12px}
+.jana-av img{width:44px;height:44px;border-radius:12px;display:block}
+.jana-av::after{content:"";position:absolute;inset:-4px;border-radius:15px;border:2px solid var(--or);opacity:0}
+.jana-av.talk::after{animation:ring 1s ease-out infinite}
+@keyframes ring{0%{opacity:.9;transform:scale(.9)}100%{opacity:0;transform:scale(1.25)}}
+.jana-ic{width:26px;height:26px;border-radius:7px;flex:none;animation:janaGlow 2.6s ease-in-out infinite}
+@keyframes janaGlow{0%,100%{box-shadow:0 0 0 0 rgba(247,132,42,.5)}60%{box-shadow:0 0 0 8px rgba(247,132,42,0)}}
+
 /* ---------- settori ---------- */
 .sect-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s1)}
 .sect{position:relative;background:var(--sf1);border:1px solid var(--b1);border-radius:var(--r-l);padding:var(--s2);display:grid;gap:10px;align-content:start;overflow:hidden;min-height:230px;transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .3s}
@@ -635,6 +666,10 @@ input[type=range]:focus{box-shadow:none}
   .scroll-cue{display:none}
   .tailor-form{position:static}
   .trial{grid-template-columns:minmax(0,1fr)}
+  .jana-intro,.jana-cols{grid-template-columns:minmax(0,1fr)}
+  .jana-mark{width:min(220px,60vw);order:-1}
+  .jana-name{padding:var(--s2);grid-template-columns:minmax(0,1fr)}
+  .jana-name img{width:48px;height:48px}
   .trial li{grid-template-columns:44px minmax(0,1fr);display:grid;column-gap:14px}
   .trial li .t-n{grid-row:span 2}
   .days-row{gap:3px}
