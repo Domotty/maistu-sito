@@ -541,7 +541,7 @@
   function buildDemo() {
     var name = (bizName && bizName.value.trim()) || SECTORS[chosen].co;
     var sew = $('#sewing'), msg = $('#sewMsg');
-    var steps = ['Prendo le misure…', 'Scelgo il tessuto: ' + SECTORS[chosen].label.toLowerCase() + '…', 'Cucio menu e moduli su misura…', 'Ultimo punto…'];
+    var steps = ['Prendiamo le misure…', 'Scegliamo il tessuto: ' + SECTORS[chosen].label.toLowerCase() + '…', 'Cuciamo menu e moduli su misura…', 'Ultimo punto…'];
     demo = genDemo(chosen, name); view = 'panoramica';
     var done = function () { sew.hidden = true; render(); saveDemo(); $('#app').classList.remove('resew'); void $('#app').offsetWidth; $('#app').classList.add('resew'); say('Ecco ' + esc(name) + ': il menu ora parla la lingua di ' + SECTORS[chosen].label.toLowerCase() + ', con tre moduli su misura. Prova a chiedermi "cosa è sotto scorta?"'); };
     if (reduce) { done(); return; }
