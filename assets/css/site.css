@@ -730,3 +730,37 @@ input[type=range]:focus{box-shadow:none}
   .js .rv{opacity:1;transform:none}
   .hx{opacity:1;transform:none}
 }
+
+/* ---------- pagine legali e conferma ---------- */
+.lhero{padding-block:var(--s4) var(--s3);position:relative;overflow:hidden}
+.lhero h1{font-size:clamp(40px,6vw,72px);margin-block:var(--s1) var(--s2)}
+.lhero h1 .or{color:var(--or)}
+.lmeta{margin-top:var(--s2);font-size:10.5px;color:var(--t3)}
+.lgrid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:var(--s4);padding-block:var(--s4) var(--s5);align-items:start}
+.ltoc{position:sticky;top:calc(var(--nav-h) + 24px);display:grid;gap:4px}
+.ltoc .mono{color:var(--t3);font-size:10.5px;margin-bottom:8px}
+.ltoc a{color:var(--t2);text-decoration:none;font-size:14.5px;padding:5px 0 5px 12px;border-left:2px solid var(--b1)}
+.ltoc a:hover{color:var(--fg);border-color:var(--or)}
+.lbody{display:grid;gap:var(--s4);min-width:0;max-width:760px}
+.lsec{display:grid;gap:12px;scroll-margin-top:calc(var(--nav-h) + 16px)}
+.lsec h2{font-size:clamp(24px,2.6vw,32px)}
+.lsec h3{font-size:17px;margin-top:8px}
+.lsec p{color:var(--t2)}
+.ltbl{overflow-x:auto;border:1px solid var(--b1);border-radius:var(--r)}
+.ltbl table{width:100%;border-collapse:collapse;font-size:14.5px}
+.ltbl th{text-align:left;font-family:var(--mono);font-weight:400;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);padding:10px 14px;background:var(--sf1);border-bottom:1px solid var(--b1)}
+.ltbl td{padding:11px 14px;border-top:1px solid var(--b1);color:var(--t2);vertical-align:top}
+.ltbl tr:first-child td{border-top:0}
+.ltbl td:first-child{color:var(--fg);font-weight:500}
+.ltbl thead tr th:empty{display:none}
+.conf{min-height:62vh;display:grid;align-items:center}
+.conf-box{max-width:620px;display:grid;gap:var(--s1);justify-items:start}
+.conf-box h1{margin:0}
+.conf-spin{display:flex;gap:8px;margin-top:8px}
+.conf-spin span{width:12px;height:12px;border-radius:3px;background:var(--b2);animation:odp 1.4s infinite}
+.conf-spin span:nth-child(2){animation-delay:.12s}.conf-spin span:nth-child(3){animation-delay:.24s;background:var(--or)}.conf-spin span:nth-child(4){animation-delay:.36s}.conf-spin span:nth-child(5){animation-delay:.48s}
+.conf-spin[hidden]{display:none}
+@media (max-width: 900px){
+  .lgrid{grid-template-columns:minmax(0,1fr);gap:var(--s3)}
+  .ltoc{position:static;grid-template-columns:repeat(2,minmax(0,1fr))}
+}
