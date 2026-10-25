@@ -510,6 +510,21 @@
   </div>
 </footer>
 
+<div class="pop" id="pop" hidden>
+  <div class="pop-bg" data-pop-close></div>
+  <div class="pop-box" role="dialog" aria-modal="true" aria-labelledby="pop-t" aria-describedby="pop-p" tabindex="-1">
+    <svg class="pop-ic" viewBox="0 0 120 120" width="88" height="88" aria-hidden="true">
+      <rect class="pop-tile" x="8" y="8" width="104" height="104" rx="22"/>
+      <polyline class="pop-zz" points="26,26 34,20 42,26 50,20 58,26 66,20 74,26 82,20 90,26 98,20" pathLength="1"/>
+      <polyline class="pop-ok" points="36,62 52,78 86,44" pathLength="1"/>
+      <polyline class="pop-zz pop-zz2" points="26,98 34,92 42,98 50,92 58,98 66,92 74,98 82,92 90,98 98,92" pathLength="1"/>
+    </svg>
+    <h3 id="pop-t">Richiesta inviata!</h3>
+    <p id="pop-p"></p>
+    <button class="btn btn-or" type="button" id="pop-ok" data-pop-close>Ok</button>
+  </div>
+</div>
+
 <script src="assets/js/config.js"></script>
 <script src="assets/js/sew-intro.js"></script>
 <script src="assets/js/site.js"></script>

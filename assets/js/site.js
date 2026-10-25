@@ -730,6 +730,28 @@
     return fetch(fnUrl(name), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { j.status = r.status; if (!r.ok) j.ok = false; return j; }); });
   }
+  /* ---------- pop-up di conferma ---------- */
+  var pop = $('#pop'), popBack = null;
+  function openPop(title, html) {
+    if (!pop) return;
+    popBack = doc.activeElement;
+    $('#pop-t').textContent = title;
+    $('#pop-p').innerHTML = html;
+    pop.hidden = false;
+    // ridisegna l'animazione a ogni apertura
+    var ic = $('.pop-ic', pop), cl = ic.cloneNode(true); ic.parentNode.replaceChild(cl, ic);
+    setTimeout(function () { $('#pop-ok').focus(); }, 30);
+  }
+  function closePop() { if (!pop || pop.hidden) return; pop.hidden = true; if (popBack && popBack.focus) popBack.focus(); }
+  if (pop) {
+    pop.addEventListener('click', function (e) { if (e.target.closest('[data-pop-close]')) closePop(); });
+    doc.addEventListener('keydown', function (e) {
+      if (pop.hidden) return;
+      if (e.key === 'Escape') closePop();
+      if (e.key === 'Tab') { e.preventDefault(); $('#pop-ok').focus(); } // un solo pulsante: il fuoco resta lì
+    });
+  }
+
   var form = $('#contactForm');
   if (form) form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -742,7 +764,13 @@
     if (data.settore) data.messaggio = 'Settore: ' + data.settore + (data.messaggio ? '\n\n' + data.messaggio : '');
     btn.disabled = true; out.className = 'f-msg'; out.textContent = 'Invio in corso…';
     post('contact', data).then(function (r) {
-      if (r.ok) { out.className = 'f-msg ok'; out.textContent = r.preview ? 'Anteprima: il modulo funziona, ma da qui non invia nulla. Su maistu.it la richiesta arriva a Domotty.' : 'Richiesta ricevuta. Ti abbiamo mandato un\'email di conferma e ti ricontattiamo presto.'; form.reset(); }
+      if (r.ok) {
+        out.className = 'f-msg'; out.textContent = '';
+        openPop('Richiesta inviata!', r.preview
+          ? 'Questa è un\'anteprima: il modulo funziona, ma da qui non parte nessun invio. Su <b>maistu.it</b> la richiesta arriva ad assistenza@maistu.it.'
+          : 'La tua richiesta «<b>' + esc(data.tipo) + '</b>» è arrivata ad <b>assistenza@maistu.it</b>. Ti abbiamo mandato un\'email di conferma e ti rispondiamo al più presto.');
+        form.reset();
+      }
       else { out.className = 'f-msg err'; out.textContent = r.status === 429 ? 'Hai già inviato alcune richieste. Riprova tra qualche minuto.' : 'Invio non riuscito. Riprova, oppure scrivici a assistenza@domotty.it.'; }
     }).catch(function () { out.className = 'f-msg err'; out.textContent = 'Invio non riuscito. Controlla la connessione, oppure scrivici a assistenza@domotty.it.'; })
       .then(function () { btn.disabled = false; });
@@ -754,8 +782,13 @@
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) { out.textContent = 'Controlla l\'email: sembra incompleta.'; return; }
     out.textContent = 'Un momento…';
     post('newsletter', { action: 'subscribe', email: em, website: $('#nl-web').value, sito: cfg.sito || 'maistu' }).then(function (r) {
-      out.textContent = r.ok ? (r.preview ? 'Anteprima: su maistu.it qui partirebbe l\'email di conferma.' : 'Quasi fatto: apri l\'email che ti abbiamo mandato per confermare.') : 'Iscrizione non riuscita. Riprova tra poco.';
-      if (r.ok) nl.reset();
+      if (r.ok) {
+        out.textContent = 'Ti mandiamo un\'email per confermare. Puoi disiscriverti quando vuoi.';
+        openPop('Controlla la tua email', r.preview
+          ? 'Questa è un\'anteprima: su <b>maistu.it</b> a <b>' + esc(em) + '</b> arriverebbe l\'email per confermare l\'iscrizione.'
+          : 'Ti abbiamo scritto a <b>' + esc(em) + '</b>. Apri il link nell\'email per confermare l\'iscrizione alle novità di Maistu.');
+        nl.reset();
+      } else out.textContent = 'Iscrizione non riuscita. Riprova tra poco.';
     }).catch(function () { out.textContent = 'Iscrizione non riuscita. Riprova tra poco.'; });
   });
 })();
