@@ -132,12 +132,14 @@
   /* ================= telaio (visione): si tesse allo scroll, poi brilla ================= */
   var loom = $('#loom'), loomDots = [], loomLit = -1, loomVisible = false;
   if (loom) {
-    var COLS = lite ? 17 : 31, ROWS = lite ? 11 : 15, MID = (ROWS - 1) / 2;
+    // il telaio occupa tutta la larghezza della sezione, centrato sotto il titolo
+    var lw = (loom.parentNode.getBoundingClientRect().width || 1200);
+    var COLS = Math.max(15, Math.min(lite ? 23 : 61, Math.floor(lw / 20) | 1)), ROWS = lite ? 13 : 17, MID = (ROWS - 1) / 2;
     loom.style.gridTemplateColumns = 'repeat(' + COLS + ', 8px)';
     var frag = doc.createDocumentFragment(), list = [];
     for (var y = 0; y < ROWS; y++) for (var x = 0; x < COLS; x++) {
       var i = doc.createElement('i');
-      var dx = Math.abs(((x + 3) % 14) - 7), dy = Math.abs(y - MID), dd = dx + dy;
+      var dx = Math.abs((((x - (COLS >> 1)) % 14) + 21) % 14 - 7), dy = Math.abs(y - MID), dd = dx + dy;
       if (dd === 7 || dd === 3) i.dataset.c = 'o'; else if (dd < 2 || y === 0 || y === ROWS - 1) i.dataset.c = 'w';
       // ordine di tessitura: riga per riga, dal basso, a zig-zag come una navetta
       var row = ROWS - 1 - y, col = row % 2 ? COLS - 1 - x : x;
