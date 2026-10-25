@@ -132,10 +132,25 @@
   /* ================= telaio (visione): si tesse allo scroll, poi brilla ================= */
   var loom = $('#loom'), loomDots = [], loomLit = -1, loomVisible = false;
   if (loom) {
-    // il telaio occupa tutta la larghezza della sezione, centrato sotto il titolo
-    var lw = (loom.parentNode.getBoundingClientRect().width || 1200);
-    var COLS = Math.max(15, Math.min(lite ? 23 : 61, Math.floor(lw / 20) | 1)), ROWS = lite ? 13 : 17, MID = (ROWS - 1) / 2;
+    // Il telaio è una fascia alta quanto il titolo e larga quanto la sezione: sfumata dietro il titolo,
+    // piena subito dopo, verso destra. Posizione e sfumatura seguono il titolo anche quando cambia la finestra.
+    var vTitle = $('#vision h2'), vSec = loom.parentNode;
+    var placeLoom = function () {
+      if (!vTitle) return;
+      // misure senza trasformazioni (il titolo entra con un'animazione che lo sposta)
+      var top = 0, left = 0, el = vTitle;
+      while (el && el !== vSec) { top += el.offsetTop; left += el.offsetLeft; el = el.offsetParent; }
+      loom.style.top = (top - 6) + 'px';
+      loom.style.height = (vTitle.offsetHeight + 12) + 'px';
+      loom.style.setProperty('--tEnd', Math.min(92, Math.round((left + vTitle.offsetWidth) / vSec.offsetWidth * 100)) + '%');
+    };
+    var lh = vTitle ? vTitle.offsetHeight + 12 : 300;
+    var lw = vSec.getBoundingClientRect().width || 1200;
+    var COLS = Math.max(15, Math.min(81, Math.ceil(lw / 20))), ROWS = Math.max(5, Math.min(19, Math.round(lh / 20))) | 1, MID = (ROWS - 1) / 2;
     loom.style.gridTemplateColumns = 'repeat(' + COLS + ', 8px)';
+    placeLoom();
+    window.addEventListener('resize', placeLoom);
+    if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(placeLoom);
     var frag = doc.createDocumentFragment(), list = [];
     for (var y = 0; y < ROWS; y++) for (var x = 0; x < COLS; x++) {
       var i = doc.createElement('i');
