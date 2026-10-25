@@ -62,6 +62,31 @@ function confirmEmailMaistu(link: string, site: string) {
 </table></td></tr></table></body></html>`;
   return { text, html };
 }
+// Email «sei già iscritto» · Domotty
+function alreadyDomotty(unsub: string) {
+  const text = `Ciao!\n\nAbbiamo ricevuto una nuova richiesta di iscrizione per questo indirizzo, ma sei già iscritto alla newsletter Domotty: non devi fare nulla.\n\nSe non vuoi più riceverla, puoi disiscriverti qui:\n${unsub}\n\nDomotty S.r.l. · Via Monsignor Cherchi 26, 09027 San Sperate (CA)\nInformativa privacy: ${SITE}/privacy.html`;
+  const html = `<div style="background:#0B1A33;padding:36px 16px;font-family:Arial,sans-serif">
+  <div style="max-width:520px;margin:0 auto;background:#10223F;border-radius:20px;padding:32px;color:#C3CEE0">
+    <p style="font-size:13px;letter-spacing:4px;color:#F7842A;font-weight:bold;margin:0 0 18px">DOMOTTY</p>
+    <h1 style="color:#F5F7FB;font-size:26px;margin:0 0 14px">Sei già iscritto!</h1>
+    <p style="font-size:15px;line-height:1.6;margin:0 0 14px">Abbiamo ricevuto una nuova richiesta di iscrizione per questo indirizzo, ma sei già iscritto alla newsletter Domotty: non devi fare nulla, continuerai a riceverla.</p>
+    <p style="font-size:13px;line-height:1.6;margin:22px 0 0;color:#93A3BE">Se non vuoi più riceverla, <a href="${unsub}" style="color:#F7842A">puoi disiscriverti qui</a>.</p>
+  </div>
+  <p style="max-width:520px;margin:16px auto 0;font-size:12px;color:#93A3BE;text-align:center">Domotty S.r.l. · Via Monsignor Cherchi 26, 09027 San Sperate (CA) · <a href="${SITE}/privacy.html" style="color:#F7842A">Informativa privacy</a></p>
+</div>`;
+  return { subject: "Sei già iscritto alla newsletter Domotty", text, html };
+}
+// Email «sei già iscritto» · Maistu
+function alreadyMaistu(unsub: string, site: string) {
+  const text = `Ciao!\n\nAbbiamo ricevuto una nuova richiesta di iscrizione per questo indirizzo, ma sei già iscritto alle novità di Maistu: non devi fare nulla.\n\nSe non vuoi più riceverle, puoi disiscriverti qui:\n${unsub}\n\nMaistu è il gestionale su misura di Domotty.\nDomotty S.r.l. · Via Monsignor Cherchi 26, 09027 San Sperate (CA)\nInformativa privacy: ${site}/privacy.html`;
+  const html = confirmEmailMaistu("", site).html
+    .replace("<title>Conferma la tua iscrizione</title>", "<title>Sei già iscritto</title>")
+    .replace(/<h1([^>]*)>Conferma la tua iscrizione<\/h1>/, "<h1$1>Sei già iscritto!</h1>")
+    .replace(/<p style="margin:0 0 14px;color:#C3CEE0;font-size:16px;line-height:1\.6;">[\s\S]*?<\/p>\s*<table[\s\S]*?<\/table>\s*<p style="margin:18px 0 0;[^"]*">[\s\S]*?<\/p>/,
+      `<p style="margin:0 0 14px;color:#C3CEE0;font-size:16px;line-height:1.6;">Abbiamo ricevuto una nuova richiesta di iscrizione per questo indirizzo, ma sei già iscritto alle novità di Maistu: non devi fare nulla, continuerai a riceverle.</p>
+<p style="margin:18px 0 0;color:#93A3BE;font-size:13px;line-height:1.5;">Se non vuoi più riceverle, <a href="${esc(unsub)}" style="color:#F7842A;">puoi disiscriverti qui</a>.</p>`);
+  return { subject: "Sei già iscritto alle novità di Maistu", text, html };
+}
 const token = () => crypto.randomUUID().replaceAll("-", "") + crypto.randomUUID().replaceAll("-", "").slice(0, 8);
 
 function confirmEmail(link: string) {
@@ -118,9 +143,24 @@ Deno.serve(async (req) => {
   const out = invio(sito);
 
   const { data: existing } = await db.from("newsletter_subscribers")
-    .select("id,status,confirm_sent_at").eq("sito", sito).eq("email", email).maybeSingle();
-  // Già iscritto e confermato: rispondiamo ok senza rivelare nulla.
-  if (existing?.status === "active") return json({ ok: true }, 200, h);
+    .select("id,status,confirm_sent_at,unsubscribe_token").eq("sito", sito).eq("email", email).maybeSingle();
+  // Già iscritto e confermato: al sito rispondiamo ok senza rivelare nulla (nessuno può scoprire
+  // chi è iscritto), ma all'indirizzo stesso mandiamo un promemoria «sei già iscritto», al massimo ogni 2 minuti.
+  if (existing?.status === "active") {
+    if (existing.confirm_sent_at && Date.now() - new Date(existing.confirm_sent_at).getTime() < 2 * 60 * 1000) {
+      return json({ ok: true }, 200, h);
+    }
+    await db.from("newsletter_subscribers").update({ confirm_sent_at: new Date().toISOString() }).eq("id", existing.id);
+    try {
+      const tx = nodemailer.createTransport({ host: out.host, port: out.port, secure: true, auth: { user: out.user, pass: out.pass } });
+      const unsub = `${out.site}/conferma.html?azione=disiscrivi&t=${existing.unsubscribe_token}`;
+      const m = sito === "maistu" ? alreadyMaistu(unsub, out.site) : alreadyDomotty(unsub);
+      await tx.sendMail({ from: out.from, to: email, subject: m.subject, text: m.text, html: m.html });
+    } catch (e) {
+      console.error("smtp", e);
+    }
+    return json({ ok: true }, 200, h);
+  }
   // Evita invii ripetuti: al massimo una email di conferma ogni 2 minuti.
   if (existing?.confirm_sent_at && Date.now() - new Date(existing.confirm_sent_at).getTime() < 2 * 60 * 1000) {
     return json({ ok: true }, 200, h);
