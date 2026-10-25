@@ -146,7 +146,7 @@
     };
     var lh = vTitle ? vTitle.offsetHeight + 12 : 300;
     var lw = vSec.getBoundingClientRect().width || 1200;
-    var COLS = Math.max(15, Math.min(81, Math.ceil(lw / 20))), ROWS = Math.max(5, Math.min(19, Math.round(lh / 20))) | 1, MID = (ROWS - 1) / 2;
+    var COLS = Math.max(15, Math.min(161, Math.ceil(Math.max(lw, (window.screen && screen.width) || 0) / 20) + 2)), ROWS = Math.max(5, Math.min(19, Math.round(lh / 20))) | 1, MID = (ROWS - 1) / 2;
     loom.style.gridTemplateColumns = 'repeat(' + COLS + ', 8px)';
     placeLoom();
     window.addEventListener('resize', placeLoom);
