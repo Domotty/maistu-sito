@@ -659,83 +659,234 @@
   });
 
   /* ================= prezzi ================= */
-  // Listino dei piani (IVA esclusa). Moduli aggiuntivi: prezzi indicativi.
+  // Listino (IVA esclusa), decisioni di Marco del 3/11/2026.
+  // Annuale = 10 mensilità pagate in una volta («2 mesi gratis»), sia per i piani sia per i moduli.
   var PRICING = {
     annualMonths: 10,      // annuale = 10 mensilità (2 mesi gratis)
+    // [DA CONFERMARE CON IL LEGALE] giorni di avviso prima del rinnovo dell'annuale.
+    // Il valore compare nel riquadro dei piani e nelle domande frequenti (elementi con data-pr="avviso").
+    rinnovoAvvisoGiorni: 30,
+    /* ---------- famiglia Aziende: per numero di addetti e di utenti ---------- */
     maxUsers: 50,          // oltre: quotazione dedicata
     sizePlan: { micro: 'bottega', piccola: 'laboratorio', media: 'atelier', grande: null },
+    lightMaxUsers: 2,      // micro imprese fino a 2 persone: si consiglia Bottega Light
+    // incl: moduli aggiuntivi già compresi nel piano (non si pagano a parte).
     plans: [
-      { id: 'bottega', name: 'Bottega', for: 'Micro imprese, fino a 9 addetti', base: 99, inc: 5, extra: 15,
+      { id: 'light', name: 'Bottega Light', for: 'Per chi lavora da solo o in due, 1–2 persone', base: 69, inc: 3, extra: 15, incl: [],
+        feat: ['Ordini e clienti', 'Magazzino', 'Documenti e fattura elettronica', 'Fatturazione', '1 canale di vendita', 'Assistenza via email e WhatsApp'], no: ['AI CORE', 'Jana'] },
+      { id: 'bottega', name: 'Bottega', for: 'Micro imprese, fino a 9 addetti', base: 99, inc: 5, extra: 15, incl: [],
         feat: ['Ordini e clienti', 'Magazzino', 'Documenti e fattura elettronica', '1 canale di vendita', 'Assistenza via email e WhatsApp'], no: ['AI CORE', 'Jana'] },
-      { id: 'laboratorio', name: 'Laboratorio', for: 'Piccole imprese, da 10 a 49 addetti', base: 199, inc: 10, extra: 12,
+      { id: 'laboratorio', name: 'Laboratorio', for: 'Piccole imprese, da 10 a 49 addetti', base: 199, inc: 10, extra: 12, incl: ['settore'],
         feat: ['Tutto di Bottega', 'Canali di vendita illimitati', '1 modulo del tuo settore incluso', 'AI CORE: avvisi e riassunti', 'Formazione del team'], no: ['Jana'] },
-      { id: 'atelier', name: 'Atelier', for: 'Medie imprese, da 50 a 249 addetti', base: 349, inc: 20, extra: 10,
+      { id: 'atelier', name: 'Atelier', for: 'Medie imprese, da 50 a 249 addetti', base: 349, inc: 20, extra: 10, incl: ['settore', 'aicore', 'jana'],
         feat: ['Tutto di Laboratorio', 'Moduli di settore illimitati', 'AI CORE con automazioni', 'Jana, comando vocale', 'Più sedi e magazzini', 'Referente dedicato'], no: [] }
     ],
-    addons: [
-      { id: 'settore', n: 'Modulo di settore', d: 'Tavoli, camere, pratiche, interventi…', p: 29 },
-      { id: 'jana', n: 'Jana', d: 'Comando vocale da telefono e computer', p: 19 },
-      { id: 'aicore', n: 'AI CORE automazioni', d: 'Email, solleciti e preventivi in automatico', p: 49 },
-      { id: 'market', n: 'Marketplace', d: 'Amazon, eBay e altri, sincronizzati', p: 39 },
-      { id: 'app', n: 'App sul campo', d: 'Per chi lavora fuori sede', p: 25 },
-      { id: 'area', n: 'Area clienti', d: 'Ordini, documenti e pagamenti online', p: 19 }
+    /* ---------- famiglia Ospitalità: per camera o alloggio, con un minimo al mese ---------- */
+    // Il minimo vale per la parte camere/alloggi; utenti in più e moduli si sommano.
+    hosp: {
+      maxUnits: 120,       // limite del cursore, non del listino
+      extra: 12,           // PROPOSTA da confermare: costo al mese di ogni utente oltre quelli inclusi
+      types: [
+        { id: 'bb', name: 'B&B e case vacanza', for: 'Bed & breakfast, case e appartamenti per vacanze', rate: 6, min: 39, inc: 3, unit: ['camera o alloggio', 'camere o alloggi'], per: 'alloggio' },
+        { id: 'hotel', name: 'Alberghi', for: 'Hotel, residence e alberghi diffusi', rate: 4, min: 99, inc: 5, unit: ['camera', 'camere'], per: 'camera' }
+      ],
+      feat: [
+        'Il gestionale: clienti, documenti e fattura elettronica, fatturazione e assistenza',
+        'Modulo ospitalità con planning',
+        'Check-in online e riconoscimento in videochiamata',
+        'Adempimenti: Questura (Alloggiati Web), ISTAT, tassa di soggiorno, CIN',
+        'Messaggi automatici agli ospiti',
+        'Prezzi e regole di vendita',
+        'Il sito della struttura con la prenotazione online',
+        'I numeri della struttura'
+      ],
+      // Esempi calcolati dal listino: [tipo, camere o alloggi, descrizione]
+      examples: [['bb', 4, 'B&B con 4 camere'], ['bb', 10, 'Case vacanza, 10 alloggi'], ['hotel', 22, 'Albergo con 22 camere'], ['hotel', 40, 'Albergo con 40 camere']]
+    },
+    /* ---------- moduli aggiuntivi a fasce (al mese; con l'annuale 10 mesi su 12) ---------- */
+    tiers: [
+      { id: 'piccolo', n: 'Piccolo', d: 'Strumenti semplici per il team', mods: [
+        { id: 'learn', n: 'D-Learn', d: 'Corsi interni e formazione del team', p: 9 },
+        { id: 'survey', n: 'D-Survey', d: 'Questionari a clienti e collaboratori', p: 9 }] },
+      { id: 'medio', n: 'Medio', d: 'Più strade verso clienti e collaboratori', mods: [
+        { id: 'project', n: 'D-Project', d: 'Progetti, attività e scadenze del team', p: 19 },
+        { id: 'chat', n: 'Chat del sito', d: 'Ti scrivono dal sito, rispondi da Maistu', p: 19 },
+        { id: 'area', n: 'Area clienti', d: 'Ordini, documenti e pagamenti online', p: 19 },
+        { id: 'jana', n: 'Jana', d: 'Comando vocale da telefono e computer', p: 19 },
+        { id: 'app', n: 'App sul campo', d: 'Per chi lavora fuori sede', p: 19 }] },
+      { id: 'settore', n: 'Settore', d: 'Cucito sul tuo mestiere', mods: [
+        { id: 'settore', n: 'Modulo di settore', d: 'Tavoli, camere, pratiche, interventi…', dOs: 'Un altro settore accanto all\'ospitalità: ristorante, centro benessere…', p: 29 }] },
+      { id: 'grande', n: 'Grande', d: 'Collegamenti e automazioni avanzate', mods: [
+        { id: 'market', n: 'Marketplace', d: 'Amazon, eBay e altri, sincronizzati', p: 39 },
+        { id: 'aicore', n: 'AI CORE automazioni', d: 'Email, solleciti e preventivi in automatico', p: 49 }] }
     ],
     custom: { id: 'custom', n: 'Modulo personalizzato su richiesta', d: 'Lo progettiamo e lo cuciamo per te: commesse, noleggi, produzione, qualsiasi cosa serva alla tua azienda.', p: 29,
       note: 'Il costo reale del modulo si preventiva in base alla richiesta: il prezzo indicato è quello di partenza.' }
   };
-  var plansEl = $('#plans'), addonsEl = $('#addons'), usersIn = $('#users'), usersOut = $('#usersOut'), quoteEl = $('#quote');
-  var bill = 'm', size = 'micro', addOn = {}, shown = {};
+  var plansEl = $('#plans'), hPlansEl = $('#hPlans'), addonsEl = $('#addons'), usersIn = $('#users'), usersOut = $('#usersOut'), quoteEl = $('#quote');
+  var unitsIn = $('#units'), unitsOut = $('#unitsOut'), hUsersIn = $('#hUsers'), hUsersOut = $('#hUsersOut');
+  var fam = 'az', bill = 'm', size = 'micro', hType = 'bb', addOn = {}, shown = {};
+  function allMods() { var a = []; PRICING.tiers.forEach(function (t) { a = a.concat(t.mods); }); return a.concat([PRICING.custom]); }
+  function hTypeOf(id) { return PRICING.hosp.types.filter(function (t) { return t.id === id; })[0]; }
   function planMonthly(pl, users) { return pl.base + Math.max(0, users - pl.inc) * pl.extra; }
-  function addonsMonthly() { return PRICING.addons.concat([PRICING.custom]).reduce(function (a, x) { return a + (addOn[x.id] ? x.p : 0); }, 0); }
+  // Parte camere/alloggi: tariffa per unità, con il minimo mensile.
+  function roomsMonthly(t, n) { return Math.max(t.rate * n, t.min); }
+  function hospMonthly(t, n, users) { return roomsMonthly(t, n) + Math.max(0, users - t.inc) * PRICING.hosp.extra; }
+  // Moduli scelti, al mese, esclusi quelli già compresi nel piano.
+  function addonsMonthly(incl) { incl = incl || []; return allMods().reduce(function (a, x) { return a + (addOn[x.id] && incl.indexOf(x.id) < 0 ? x.p : 0); }, 0); }
+  function inclChosen(incl) { return allMods().filter(function (x) { return addOn[x.id] && (incl || []).indexOf(x.id) > -1; }).map(function (x) { return x.n; }); }
+  function billing(m) {
+    return { per: Math.round(bill === 'y' ? m * PRICING.annualMonths / 12 : m), sub: bill === 'y' ? eur(m * PRICING.annualMonths, 0) + ' all\'anno, in un\'unica volta' : 'Fatturato ogni mese' };
+  }
   function tween(el, from, to) {
     if (reduce || from === to || from == null) { el.textContent = eur(to, 0); return; }
     var t0 = performance.now();
     (function step(now) { var k = Math.min(1, (now - t0) / 380); k = 1 - Math.pow(1 - k, 3); el.textContent = eur(Math.round(from + (to - from) * k), 0); if (k < 1) requestAnimationFrame(step); })(t0);
   }
-  function renderPlans() {
-    if (!plansEl) return;
-    var raw = +usersIn.value, over = raw > PRICING.maxUsers, u = Math.min(raw, PRICING.maxUsers);
-    usersOut.value = over ? PRICING.maxUsers + '+' : String(u); usersOut.textContent = usersOut.value;
-    usersIn.style.setProperty('--fill', ((raw - 1) / (+usersIn.max - 1) * 100) + '%');
-    var quote = over || !PRICING.sizePlan[size];
-    var recoId = PRICING.sizePlan[size];
-    quoteEl.hidden = !quote;
-    if (quote) $('#quoteT').textContent = over ? 'Oltre ' + PRICING.maxUsers + ' persone prepariamo un\'offerta dedicata.' : 'Per un\'azienda con più di 250 addetti prepariamo un\'offerta dedicata.';
-    plansEl.classList.toggle('dim', quote);
-    var ao = addonsMonthly(), hasCustom = !!addOn.custom;
-    plansEl.innerHTML = PRICING.plans.map(function (p) {
-      var m = planMonthly(p, u) + ao, per = Math.round(bill === 'y' ? m * PRICING.annualMonths / 12 : m);
-      var sub = bill === 'y' ? eur(m * PRICING.annualMonths, 0) + ' all\'anno' : 'Fatturato ogni mese';
-      var reco = !quote && p.id === recoId;
-      return '<article class="plan' + (reco ? ' reco' : '') + '" data-plan-id="' + p.id + '"><span class="badge">Il piano per la tua azienda</span><h3>' + p.name + '</h3><p class="for">' + p.for + '</p>' +
-        '<div class="price">' + (hasCustom ? '<span class="u">da</span>' : '') + '<span class="n" data-v="' + per + '">' + eur(shown[p.id] == null ? per : shown[p.id], 0) + '</span><span class="u">/mese + IVA</span></div>' +
-        '<p class="price-sub">' + sub + ' · ' + p.inc + ' utenti inclusi, poi ' + eur(p.extra, 0) + ' l\'uno' + (ao ? ' · moduli aggiuntivi compresi' : '') + '</p>' +
-        '<ul>' + p.feat.map(function (f) { return '<li>' + f + '</li>'; }).join('') + p.no.map(function (f) { return '<li class="no">' + f + ' come modulo aggiuntivo</li>'; }).join('') + '</ul>' +
-        '<a class="btn ' + (reco ? 'btn-or' : 'btn-ghost') + '" href="#contatti" data-tipo="Preventivo piani cloud" data-plan="' + p.name + '">Scegli ' + p.name + '</a></article>';
-    }).join('');
-    $$('.price .n', plansEl).forEach(function (el) {
+  function animatePrices(root) {
+    $$('.price .n', root).forEach(function (el) {
       var id = el.closest('.plan').getAttribute('data-plan-id'), to = +el.getAttribute('data-v');
       tween(el, shown[id], to); shown[id] = to;
     });
   }
+  function setRange(inp, out, txt) {
+    out.value = txt; out.textContent = txt;
+    inp.style.setProperty('--fill', ((+inp.value - +inp.min) / (+inp.max - +inp.min) * 100) + '%');
+  }
+  function priceHtml(per) { return '<div class="price">' + (addOn.custom ? '<span class="u">da</span>' : '') + '<span class="n" data-v="' + per + '">' + eur(per, 0) + '</span><span class="u">/mese + IVA</span></div>'; }
+  function renderPlans() {
+    if (!plansEl) return;
+    var raw = +usersIn.value, over = raw > PRICING.maxUsers, u = Math.min(raw, PRICING.maxUsers);
+    setRange(usersIn, usersOut, over ? PRICING.maxUsers + '+' : String(u));
+    var quote = over || !PRICING.sizePlan[size];
+    var recoId = size === 'micro' && u <= PRICING.lightMaxUsers ? 'light' : PRICING.sizePlan[size];
+    quoteEl.hidden = !quote;
+    if (quote) $('#quoteT').textContent = over ? 'Oltre ' + PRICING.maxUsers + ' persone prepariamo un\'offerta dedicata.' : 'Per un\'azienda con più di 250 addetti prepariamo un\'offerta dedicata.';
+    plansEl.classList.toggle('dim', quote);
+    plansEl.innerHTML = PRICING.plans.map(function (p) {
+      var ao = addonsMonthly(p.incl), b = billing(planMonthly(p, u) + ao), inc = inclChosen(p.incl);
+      var reco = !quote && p.id === recoId;
+      return '<article class="plan' + (reco ? ' reco' : '') + '" data-plan-id="' + p.id + '"><span class="badge">Il piano per la tua azienda</span><h3>' + p.name + '</h3><p class="for">' + p.for + '</p>' +
+        priceHtml(b.per) +
+        '<p class="price-sub">' + b.sub + ' · ' + p.inc + ' utenti inclusi, poi ' + eur(p.extra, 0) + ' l\'uno' + (ao ? ' · moduli aggiuntivi compresi' : '') + (inc.length ? ' · ' + inc.join(', ') + ' già nel piano' : '') + '</p>' +
+        '<ul>' + p.feat.map(function (f) { return '<li>' + f + '</li>'; }).join('') + p.no.map(function (f) { return '<li class="no">' + f + ' come modulo aggiuntivo</li>'; }).join('') + '</ul>' +
+        '<a class="btn ' + (reco ? 'btn-or' : 'btn-ghost') + '" href="#contatti" data-tipo="Preventivo piani cloud" data-plan="' + p.id + '">Scegli ' + p.name + '</a></article>';
+    }).join('');
+    animatePrices(plansEl);
+  }
+  function unitWord(t, n) { return n === 1 ? t.unit[0] : t.unit[1]; }
+  function renderHosp() {
+    if (!hPlansEl) return;
+    var n = +unitsIn.value, u = +hUsersIn.value, ao = addonsMonthly([]), H = PRICING.hosp;
+    setRange(unitsIn, unitsOut, String(n));
+    setRange(hUsersIn, hUsersOut, String(u));
+    hPlansEl.innerHTML = H.types.map(function (t) {
+      var rooms = t.rate * n, minOn = rooms < t.min, b = billing(hospMonthly(t, n, u) + ao), reco = t.id === hType;
+      var line = n + ' ' + unitWord(t, n) + ' × ' + eur(t.rate, 0) + ' = ' + eur(rooms, 0) + (minOn ? ': si applica il minimo di ' + eur(t.min, 0) : '');
+      return '<article class="plan' + (reco ? ' reco' : '') + '" data-plan-id="h-' + t.id + '"><span class="badge">Per la tua struttura</span><h3>' + esc(t.name) + '</h3><p class="for">' + t.for + '</p>' +
+        priceHtml(b.per) +
+        '<p class="price-sub">' + b.sub + ' · ' + t.inc + ' utenti inclusi, poi ' + eur(H.extra, 0) + ' l\'uno' + (ao ? ' · moduli aggiuntivi compresi' : '') + '</p>' +
+        '<ul><li><span><b>' + eur(t.rate, 0) + ' al mese per ' + t.per + '</b>, minimo ' + eur(t.min, 0) + ' al mese</span></li><li class="calc-line"><span>' + line + '</span></li><li><span>Tutto quello che trovi in «Sempre incluso»</span></li></ul>' +
+        '<a class="btn ' + (reco ? 'btn-or' : 'btn-ghost') + '" href="#contatti" data-tipo="Preventivo piani cloud" data-plan="h-' + t.id + '">Scegli ' + esc(t.name) + '</a></article>';
+    }).join('');
+    animatePrices(hPlansEl);
+  }
+  function renderAll() { renderPlans(); renderHosp(); }
+  // Gruppo di scelte (role=radio): clic, frecce, Home/Fine; solo la scelta attiva entra nel giro del Tab.
+  function radioGroup(group, attr, onPick) {
+    var btns = $$('[role=radio]', group);
+    function pick(b, focus) {
+      btns.forEach(function (x) { var on = x === b; x.setAttribute('aria-checked', String(on)); x.tabIndex = on ? 0 : -1; });
+      if (focus) b.focus();
+      onPick(b.getAttribute(attr));
+    }
+    btns.forEach(function (b) {
+      b.tabIndex = b.getAttribute('aria-checked') === 'true' ? 0 : -1;
+      b.addEventListener('click', function () { pick(b); });
+      b.addEventListener('keydown', function (e) {
+        var i = btns.indexOf(b), j = { ArrowRight: i + 1, ArrowDown: i + 1, ArrowLeft: i - 1, ArrowUp: i - 1, Home: 0, End: btns.length - 1 }[e.key];
+        if (j == null) return;
+        e.preventDefault(); pick(btns[(j + btns.length) % btns.length], true);
+      });
+    });
+    return function (val) { btns.forEach(function (b) { if (b.getAttribute(attr) === val) pick(b); }); };
+  }
+  function setFam(f, focus) {
+    fam = f;
+    $$('#fam [role=tab]').forEach(function (t) {
+      var on = t.getAttribute('data-fam') === f;
+      t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+      $('#' + t.getAttribute('aria-controls')).hidden = !on;
+      if (on && focus) t.focus();
+    });
+    var s = $('[data-a="settore"] .ad', addonsEl), m = PRICING.tiers[2].mods[0];
+    if (s) s.textContent = f === 'os' ? m.dOs : m.d;
+    store.set('maistu-famiglia', f, true);
+  }
   if (plansEl) {
-    addonsEl.innerHTML = PRICING.addons.map(function (a) { return '<button type="button" class="addon" aria-pressed="false" data-a="' + a.id + '"><span class="an">' + a.n + '</span><span class="ap">+ ' + eur(a.p, 0) + '/mese</span><span class="ad">' + a.d + '</span></button>'; }).join('') +
+    $$('[data-pr="avviso"]').forEach(function (el) { el.textContent = PRICING.rinnovoAvvisoGiorni; });
+    PRICING.hosp.types.forEach(function (t) {
+      $$('[data-pr="osp-' + t.id + '"]').forEach(function (el) { el.textContent = eur(t.rate, 0) + ' al mese per ' + t.per + (t.id === 'bb' ? ' per B&B e case vacanza' : ' per gli alberghi') + ' (minimo ' + eur(t.min, 0) + ')'; });
+    });
+    unitsIn.max = PRICING.hosp.maxUnits;
+    var btn = function (a) { return '<button type="button" class="addon" aria-pressed="false" data-a="' + a.id + '"><span class="an">' + a.n + '</span><span class="ap">+ ' + eur(a.p, 0) + '/mese</span><span class="ad">' + a.d + '</span></button>'; };
+    addonsEl.innerHTML = PRICING.tiers.map(function (t) {
+      var ps = t.mods.map(function (m) { return m.p; }), lo = Math.min.apply(null, ps), hi = Math.max.apply(null, ps);
+      return '<div class="tier" role="group" aria-labelledby="tier-' + t.id + '"><div class="tier-h"><span class="tier-n" id="tier-' + t.id + '">Fascia ' + t.n + '</span>' +
+        '<span class="tier-p">' + (lo === hi ? eur(lo, 0) : eur(lo, 0) + '–' + hi) + '<small> al mese a modulo</small></span><span class="tier-d">' + t.d + '</span></div>' +
+        '<div class="tier-mods">' + t.mods.map(btn).join('') + '</div></div>';
+    }).join('') +
       '<button type="button" class="addon addon-custom" aria-pressed="false" data-a="custom"><span class="ac-l"><span class="an">' + PRICING.custom.n + '</span><span class="ap">da ' + eur(PRICING.custom.p, 0) + '/mese</span><span class="ad">' + PRICING.custom.d + '</span></span><span class="ac-r">' + PRICING.custom.note + '</span></button>';
-    addonsEl.addEventListener('click', function (e) { var b = e.target.closest('.addon'); if (!b) return; var id = b.getAttribute('data-a'); addOn[id] = !addOn[id]; b.setAttribute('aria-pressed', String(addOn[id])); renderPlans(); });
+    addonsEl.addEventListener('click', function (e) { var b = e.target.closest('.addon'); if (!b) return; var id = b.getAttribute('data-a'); addOn[id] = !addOn[id]; b.setAttribute('aria-pressed', String(addOn[id])); renderAll(); });
     usersIn.addEventListener('input', renderPlans);
-    $$('#billing button').forEach(function (b) { b.addEventListener('click', function () { bill = b.getAttribute('data-bill'); $$('#billing button').forEach(function (x) { x.setAttribute('aria-checked', String(x === b)); }); renderPlans(); }); });
+    unitsIn.addEventListener('input', renderHosp);
+    hUsersIn.addEventListener('input', renderHosp);
+    radioGroup($('#billing'), 'data-bill', function (v) { bill = v; renderAll(); });
     // La dimensione sceglie il piano; il numero di persone resta quello impostato.
-    $$('#size button').forEach(function (b) { b.addEventListener('click', function () { size = b.getAttribute('data-size'); $$('#size button').forEach(function (x) { x.setAttribute('aria-checked', String(x === b)); }); renderPlans(); }); });
-    renderPlans();
+    radioGroup($('#size'), 'data-size', function (v) { size = v; renderPlans(); });
+    var pickType = radioGroup($('#hType'), 'data-h', function (v) { hType = v; renderHosp(); });
+    // Esempi: calcolati dal listino; un clic li riporta nel calcolatore.
+    $('#hEx').innerHTML = PRICING.hosp.examples.map(function (x) {
+      var t = hTypeOf(x[0]), r = roomsMonthly(t, x[1]);
+      return '<button type="button" class="ex" data-ex-t="' + x[0] + '" data-ex-n="' + x[1] + '"><span>' + esc(x[2]) + '</span><b>' + eur(r, 0) + '</b><small>' + (t.rate * x[1] < t.min ? 'il minimo' : x[1] + ' × ' + eur(t.rate, 0)) + '</small></button>';
+    }).join('');
+    $('#hEx').addEventListener('click', function (e) {
+      var b = e.target.closest('.ex'); if (!b) return;
+      unitsIn.value = b.getAttribute('data-ex-n'); pickType(b.getAttribute('data-ex-t'));
+    });
+    $('#hInc').innerHTML = PRICING.hosp.feat.map(function (f) { return '<li>' + f + '</li>'; }).join('');
+    // Linguette Aziende / Ospitalità (frecce, Home e Fine come nelle linguette standard).
+    var tabs = $$('#fam [role=tab]');
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { setFam(t.getAttribute('data-fam')); });
+      t.addEventListener('keydown', function (e) {
+        var j = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+        if (j == null) return;
+        e.preventDefault(); setFam(tabs[(j + tabs.length) % tabs.length].getAttribute('data-fam'), true);
+      });
+    });
+    setFam(location.hash === '#ospitalita' || store.get('maistu-famiglia', true) === 'os' ? 'os' : 'az');
+    renderAll();
   }
   // I pulsanti di piani, quotazioni e moduli precompilano il modulo contatti.
+  var autoMsg = '';
   doc.addEventListener('click', function (e) {
     var a = e.target.closest('[data-tipo]'); if (!a) return;
-    var sel = $('#f-tipo'), msg = $('#f-msg');
+    var sel = $('#f-tipo'), msg = $('#f-msg'), id = a.getAttribute('data-plan');
     if (sel) sel.value = a.getAttribute('data-tipo');
-    if (msg && a.getAttribute('data-plan') && !msg.value) {
-      var extras = PRICING.addons.concat([PRICING.custom]).filter(function (x) { return addOn[x.id]; }).map(function (x) { return x.n; });
-      msg.value = 'Piano ' + a.getAttribute('data-plan') + ', ' + usersOut.value + ' utenti, fatturazione ' + (bill === 'y' ? 'annuale' : 'mensile') + (extras.length ? ', con ' + extras.join(', ') : '') + '.';
+    // Il testo si riscrive solo se è vuoto o se l'avevamo scritto noi.
+    if (msg && id && (!msg.value || msg.value === autoMsg)) {
+      var extras = allMods().filter(function (x) { return addOn[x.id]; }).map(function (x) { return x.n; });
+      var tail = ', fatturazione ' + (bill === 'y' ? 'annuale' : 'mensile') + (extras.length ? ', con ' + extras.join(', ') : '') + '.';
+      if (id.indexOf('h-') === 0) {
+        var t = hTypeOf(id.slice(2)), n = +unitsIn.value;
+        msg.value = 'Piano Ospitalità «' + t.name + '», ' + n + ' ' + unitWord(t, n) + ', ' + hUsersIn.value + ' utenti' + tail;
+        var fs = $('#f-settore'); if (fs && !fs.value) fs.value = 'Hotel e ospitalità';
+      } else {
+        var p = PRICING.plans.filter(function (x) { return x.id === id; })[0];
+        msg.value = 'Piano ' + p.name + ', ' + usersOut.value + ' utenti' + tail;
+      }
+      autoMsg = msg.value;
     }
   });
 
