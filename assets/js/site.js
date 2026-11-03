@@ -669,13 +669,13 @@
     /* ---------- famiglia Aziende: per numero di addetti e di utenti ---------- */
     maxUsers: 50,          // oltre: quotazione dedicata
     sizePlan: { micro: 'bottega', piccola: 'laboratorio', media: 'atelier', grande: null },
-    lightMaxUsers: 2,      // micro imprese fino a 2 persone: si consiglia Bottega Light
     // incl: moduli aggiuntivi già compresi nel piano (non si pagano a parte).
+    // max: persone al massimo (niente utenti in più); oltre, il piano non è disponibile e si rimanda a «next».
     plans: [
-      { id: 'light', name: 'Bottega Light', for: 'Per chi lavora da solo o in due, 1–2 persone', base: 69, inc: 3, extra: 15, incl: [],
+      { id: 'light', name: 'Bottega Light', for: 'Per chi lavora da solo o in pochi, fino a 3 persone', base: 69, inc: 3, extra: 0, max: 3, next: 'Bottega', incl: [],
         feat: ['Ordini e clienti', 'Magazzino', 'Documenti e fattura elettronica', 'Fatturazione', '1 canale di vendita', 'Assistenza via email e WhatsApp'], no: ['AI CORE', 'Jana'] },
       { id: 'bottega', name: 'Bottega', for: 'Micro imprese, fino a 9 addetti', base: 99, inc: 5, extra: 15, incl: [],
-        feat: ['Ordini e clienti', 'Magazzino', 'Documenti e fattura elettronica', '1 canale di vendita', 'Assistenza via email e WhatsApp'], no: ['AI CORE', 'Jana'] },
+        feat: ['Ordini e clienti', 'Magazzino', 'Documenti e fattura elettronica', 'Fatturazione', '1 canale di vendita', 'Assistenza via email e WhatsApp'], no: ['AI CORE', 'Jana'] },
       { id: 'laboratorio', name: 'Laboratorio', for: 'Piccole imprese, da 10 a 49 addetti', base: 199, inc: 10, extra: 12, incl: ['settore'],
         feat: ['Tutto di Bottega', 'Canali di vendita illimitati', '1 modulo del tuo settore incluso', 'AI CORE: avvisi e riassunti', 'Formazione del team'], no: ['Jana'] },
       { id: 'atelier', name: 'Atelier', for: 'Medie imprese, da 50 a 249 addetti', base: 349, inc: 20, extra: 10, incl: ['settore', 'aicore', 'jana'],
@@ -684,7 +684,7 @@
     /* ---------- famiglia Ospitalità: per camera o alloggio, con un minimo al mese ---------- */
     // Il minimo vale per la parte camere/alloggi; utenti in più e moduli si sommano.
     hosp: {
-      maxUnits: 120,       // limite del cursore, non del listino
+      maxUnits: 120,       // oltre: quotazione dedicata (il cursore arriva a 121 = «più di 120»)
       extra: 12,           // PROPOSTA da confermare: costo al mese di ogni utente oltre quelli inclusi
       types: [
         { id: 'bb', name: 'B&B e case vacanza', for: 'Bed & breakfast, case e appartamenti per vacanze', rate: 6, min: 39, inc: 3, unit: ['camera o alloggio', 'camere o alloggi'], per: 'alloggio' },
@@ -724,7 +724,7 @@
       note: 'Il costo reale del modulo si preventiva in base alla richiesta: il prezzo indicato è quello di partenza.' }
   };
   var plansEl = $('#plans'), hPlansEl = $('#hPlans'), addonsEl = $('#addons'), usersIn = $('#users'), usersOut = $('#usersOut'), quoteEl = $('#quote');
-  var unitsIn = $('#units'), unitsOut = $('#unitsOut'), hUsersIn = $('#hUsers'), hUsersOut = $('#hUsersOut');
+  var hQuoteEl = $('#hQuote'), unitsIn = $('#units'), unitsOut = $('#unitsOut'), hUsersIn = $('#hUsers'), hUsersOut = $('#hUsersOut');
   var fam = 'az', bill = 'm', size = 'micro', hType = 'bb', addOn = {}, shown = {};
   function allMods() { var a = []; PRICING.tiers.forEach(function (t) { a = a.concat(t.mods); }); return a.concat([PRICING.custom]); }
   function hTypeOf(id) { return PRICING.hosp.types.filter(function (t) { return t.id === id; })[0]; }
@@ -744,7 +744,7 @@
     (function step(now) { var k = Math.min(1, (now - t0) / 380); k = 1 - Math.pow(1 - k, 3); el.textContent = eur(Math.round(from + (to - from) * k), 0); if (k < 1) requestAnimationFrame(step); })(t0);
   }
   function animatePrices(root) {
-    $$('.price .n', root).forEach(function (el) {
+    $$('.price .n[data-v]', root).forEach(function (el) {
       var id = el.closest('.plan').getAttribute('data-plan-id'), to = +el.getAttribute('data-v');
       tween(el, shown[id], to); shown[id] = to;
     });
@@ -759,29 +759,37 @@
     var raw = +usersIn.value, over = raw > PRICING.maxUsers, u = Math.min(raw, PRICING.maxUsers);
     setRange(usersIn, usersOut, over ? PRICING.maxUsers + '+' : String(u));
     var quote = over || !PRICING.sizePlan[size];
-    var recoId = size === 'micro' && u <= PRICING.lightMaxUsers ? 'light' : PRICING.sizePlan[size];
+    // Micro imprese: si consiglia Bottega Light finché le persone ci stanno.
+    var light = PRICING.plans[0];
+    var recoId = size === 'micro' && u <= light.max ? 'light' : PRICING.sizePlan[size];
     quoteEl.hidden = !quote;
     if (quote) $('#quoteT').textContent = over ? 'Oltre ' + PRICING.maxUsers + ' persone prepariamo un\'offerta dedicata.' : 'Per un\'azienda con più di 250 addetti prepariamo un\'offerta dedicata.';
     plansEl.classList.toggle('dim', quote);
     plansEl.innerHTML = PRICING.plans.map(function (p) {
       var ao = addonsMonthly(p.incl), b = billing(planMonthly(p, u) + ao), inc = inclChosen(p.incl);
-      var reco = !quote && p.id === recoId;
-      return '<article class="plan' + (reco ? ' reco' : '') + '" data-plan-id="' + p.id + '"><span class="badge">Il piano per la tua azienda</span><h3>' + p.name + '</h3><p class="for">' + p.for + '</p>' +
-        priceHtml(b.per) +
-        '<p class="price-sub">' + b.sub + ' · ' + p.inc + ' utenti inclusi, poi ' + eur(p.extra, 0) + ' l\'uno' + (ao ? ' · moduli aggiuntivi compresi' : '') + (inc.length ? ' · ' + inc.join(', ') + ' già nel piano' : '') + '</p>' +
+      var na = p.max && u > p.max, reco = !quote && !na && p.id === recoId;
+      var users = p.max ? p.inc + ' utenti inclusi, nessun utente in più' : p.inc + ' utenti inclusi, poi ' + eur(p.extra, 0) + ' l\'uno';
+      return '<article class="plan' + (reco ? ' reco' : '') + (na ? ' na' : '') + '" data-plan-id="' + p.id + '"><span class="badge">Il piano per la tua azienda</span><h3>' + p.name + '</h3><p class="for">' + p.for + '</p>' +
+        (na ? '<div class="price"><span class="n">Fino a ' + p.max + ' persone: oltre, ' + p.next + '</span></div>' : priceHtml(b.per)) +
+        '<p class="price-sub">' + (na ? eur(p.base, 0) + ' al mese, ' + p.inc + ' utenti inclusi, nessun utente in più' : b.sub + ' · ' + users + (ao ? ' · moduli aggiuntivi compresi' : '') + (inc.length ? ' · ' + inc.join(', ') + ' già nel piano' : '')) + '</p>' +
         '<ul>' + p.feat.map(function (f) { return '<li>' + f + '</li>'; }).join('') + p.no.map(function (f) { return '<li class="no">' + f + ' come modulo aggiuntivo</li>'; }).join('') + '</ul>' +
-        '<a class="btn ' + (reco ? 'btn-or' : 'btn-ghost') + '" href="#contatti" data-tipo="Preventivo piani cloud" data-plan="' + p.id + '">Scegli ' + p.name + '</a></article>';
+        (na ? '<span class="btn btn-ghost btn-off" aria-disabled="true">Non disponibile oltre ' + p.max + ' persone</span></article>'
+          : '<a class="btn ' + (reco ? 'btn-or' : 'btn-ghost') + '" href="#contatti" data-tipo="Preventivo piani cloud" data-plan="' + p.id + '">Scegli ' + p.name + '</a></article>');
     }).join('');
     animatePrices(plansEl);
   }
   function unitWord(t, n) { return n === 1 ? t.unit[0] : t.unit[1]; }
   function renderHosp() {
     if (!hPlansEl) return;
-    var n = +unitsIn.value, u = +hUsersIn.value, ao = addonsMonthly([]), H = PRICING.hosp;
-    setRange(unitsIn, unitsOut, String(n));
+    var H = PRICING.hosp, raw = +unitsIn.value, over = raw > H.maxUnits, n = Math.min(raw, H.maxUnits), u = +hUsersIn.value, ao = addonsMonthly([]);
+    setRange(unitsIn, unitsOut, over ? H.maxUnits + '+' : String(n));
+    unitsIn.setAttribute('aria-valuetext', over ? 'più di ' + H.maxUnits : String(n));
     setRange(hUsersIn, hUsersOut, String(u));
+    // Oltre il massimo di camere o alloggi: quotazione dedicata, come per le aziende oltre 50 persone.
+    hQuoteEl.hidden = !over;
+    hPlansEl.classList.toggle('dim', over);
     hPlansEl.innerHTML = H.types.map(function (t) {
-      var rooms = t.rate * n, minOn = rooms < t.min, b = billing(hospMonthly(t, n, u) + ao), reco = t.id === hType;
+      var rooms = t.rate * n, minOn = rooms < t.min, b = billing(hospMonthly(t, n, u) + ao), reco = !over && t.id === hType;
       var line = n + ' ' + unitWord(t, n) + ' × ' + eur(t.rate, 0) + ' = ' + eur(rooms, 0) + (minOn ? ': si applica il minimo di ' + eur(t.min, 0) : '');
       return '<article class="plan' + (reco ? ' reco' : '') + '" data-plan-id="h-' + t.id + '"><span class="badge">Per la tua struttura</span><h3>' + esc(t.name) + '</h3><p class="for">' + t.for + '</p>' +
         priceHtml(b.per) +
@@ -828,7 +836,7 @@
     PRICING.hosp.types.forEach(function (t) {
       $$('[data-pr="osp-' + t.id + '"]').forEach(function (el) { el.textContent = eur(t.rate, 0) + ' al mese per ' + t.per + (t.id === 'bb' ? ' per B&B e case vacanza' : ' per gli alberghi') + ' (minimo ' + eur(t.min, 0) + ')'; });
     });
-    unitsIn.max = PRICING.hosp.maxUnits;
+    unitsIn.max = PRICING.hosp.maxUnits + 1;
     var btn = function (a) { return '<button type="button" class="addon" aria-pressed="false" data-a="' + a.id + '"><span class="an">' + a.n + '</span><span class="ap">+ ' + eur(a.p, 0) + '/mese</span><span class="ad">' + a.d + '</span></button>'; };
     addonsEl.innerHTML = PRICING.tiers.map(function (t) {
       var ps = t.mods.map(function (m) { return m.p; }), lo = Math.min.apply(null, ps), hi = Math.max.apply(null, ps);
@@ -880,7 +888,8 @@
       var tail = ', fatturazione ' + (bill === 'y' ? 'annuale' : 'mensile') + (extras.length ? ', con ' + extras.join(', ') : '') + '.';
       if (id.indexOf('h-') === 0) {
         var t = hTypeOf(id.slice(2)), n = +unitsIn.value;
-        msg.value = 'Piano Ospitalità «' + t.name + '», ' + n + ' ' + unitWord(t, n) + ', ' + hUsersIn.value + ' utenti' + tail;
+        var nTxt = n > PRICING.hosp.maxUnits ? 'più di ' + PRICING.hosp.maxUnits + ' ' + t.unit[1] : n + ' ' + unitWord(t, n);
+        msg.value = 'Piano Ospitalità «' + t.name + '», ' + nTxt + ', ' + hUsersIn.value + ' utenti' + tail;
         var fs = $('#f-settore'); if (fs && !fs.value) fs.value = 'Hotel e ospitalità';
       } else {
         var p = PRICING.plans.filter(function (x) { return x.id === id; })[0];

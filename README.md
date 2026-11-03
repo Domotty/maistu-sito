@@ -31,12 +31,12 @@ Annuale = 10 mensilità pagate in una volta («2 mesi gratis»), per i piani e p
 
 | Piano | Al mese | Utenti inclusi | Utente in più |
 |---|---|---|---|
-| Bottega Light (1–2 persone) | 69 € | 3 | 15 € |
+| Bottega Light (fino a 3 persone; oltre, Bottega) | 69 € | 3 | nessuno |
 | Bottega | 99 € | 5 | 15 € |
 | Laboratorio (1 modulo di settore incluso) | 199 € | 10 | 12 € |
 | Atelier (moduli di settore illimitati, AI CORE automazioni, Jana) | 349 € | 20 | 10 € |
 
-**Ospitalità** (per camera o alloggio; il minimo vale per la parte camere, utenti e moduli si sommano)
+**Ospitalità** (per camera o alloggio; il minimo vale solo per camere e alloggi, utenti e moduli si sommano; oltre 120 camere o alloggi: su quotazione)
 
 | Piano | Al mese | Minimo | Utenti inclusi | Utente in più |
 |---|---|---|---|---|
