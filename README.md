@@ -22,4 +22,29 @@ altrove l'invio è simulato. Prima della messa online servono:
 - aggiornamento delle Edge Functions Supabase di domotty.it (origini consentite, tipo "Prova Maistu 15 giorni", campo `sito`);
 - file `CNAME` con `maistu.it` e DNS del dominio verso GitHub Pages.
 
-Listino: `PRICING` in `assets/js/site.js`.
+## Listino
+
+Tutto in `PRICING` in `assets/js/site.js` (prezzi IVA esclusa; decisioni del 3/11/2026).
+Annuale = 10 mensilità pagate in una volta («2 mesi gratis»), per i piani e per i moduli.
+
+**Aziende** (per numero di addetti e di utenti; oltre 50 utenti o 250 addetti: su quotazione)
+
+| Piano | Al mese | Utenti inclusi | Utente in più |
+|---|---|---|---|
+| Bottega Light (fino a 3 persone; oltre, Bottega) | 69 € | 3 | nessuno |
+| Bottega | 99 € | 5 | 15 € |
+| Laboratorio (1 modulo di settore incluso) | 199 € | 10 | 12 € |
+| Atelier (moduli di settore illimitati, AI CORE automazioni, Jana) | 349 € | 20 | 10 € |
+
+**Ospitalità** (per camera o alloggio; il minimo vale solo per camere e alloggi, utenti e moduli si sommano; oltre 120 camere o alloggi: su quotazione)
+
+| Piano | Al mese | Minimo | Utenti inclusi | Utente in più |
+|---|---|---|---|---|
+| B&B e case vacanza | 6 € ad alloggio | 39 € | 3 | 12 € (proposta) |
+| Alberghi | 4 € a camera | 99 € | 5 | 12 € (proposta) |
+
+**Moduli aggiuntivi a fasce** (al mese): Piccolo 9 € (D-Learn, D-Survey) · Medio 19 € (D-Project, Chat del sito,
+Area clienti, Jana, App sul campo) · Settore 29 € (modulo del tuo settore) · Grande 39 € (Marketplace) e 49 €
+(AI CORE automazioni) · Modulo personalizzato da 29 €. I moduli già compresi nel piano non si pagano a parte.
+
+Rinnovo dell'annuale: avviso `rinnovoAvvisoGiorni` giorni prima (oggi 30, **da confermare con il legale**).

@@ -355,43 +355,96 @@
     <div class="head rv">
       <p class="eyebrow">Piani e prezzi</p>
       <h2>Paghi la misura che ti serve.</h2>
-      <p class="lead">Scegli la dimensione della tua azienda: ti indichiamo il piano giusto. Poi indica quante persone lo useranno e guarda il conto.</p>
+      <p class="lead">Un'azienda si misura in persone, una struttura ricettiva in camere. Scegli la tua famiglia di piani, indica quanto sei grande e guarda il conto.</p>
     </div>
 
     <div class="calc rv" id="calc">
-      <div class="calc-ctl">
+      <div class="calc-top">
+        <div class="fam" role="tablist" aria-label="Famiglia di piani" id="fam">
+          <button type="button" role="tab" id="tab-az" aria-selected="true" aria-controls="pan-az" data-fam="az"><span class="ft">Aziende</span><span class="fd">Prezzo in base alle persone</span></button>
+          <button type="button" role="tab" id="tab-os" aria-selected="false" aria-controls="pan-os" tabindex="-1" data-fam="os"><span class="ft">Ospitalità</span><span class="fd">B&amp;B, case vacanza e alberghi: prezzo a camera</span></button>
+        </div>
         <div class="seg" role="radiogroup" aria-label="Fatturazione" id="billing">
           <button type="button" role="radio" aria-checked="true" data-bill="m">Mensile</button>
           <button type="button" role="radio" aria-checked="false" data-bill="y">Annuale <span class="save">2 mesi gratis</span></button>
         </div>
-        <div class="ctl">
-          <label for="users">Persone che usano Maistu</label>
-          <div class="range-row"><input type="range" id="users" min="1" max="51" value="6"><output id="usersOut" class="mono">6</output></div>
-        </div>
-        <div class="ctl">
-          <span class="ctl-l" id="sizeL">Dimensione dell'azienda</span>
-          <div class="seg seg-4" role="radiogroup" aria-labelledby="sizeL" id="size">
-            <button type="button" role="radio" aria-checked="true" data-size="micro">Micro<small>fino a 9 addetti</small></button>
-            <button type="button" role="radio" aria-checked="false" data-size="piccola">Piccola<small>10–49</small></button>
-            <button type="button" role="radio" aria-checked="false" data-size="media">Media<small>50–249</small></button>
-            <button type="button" role="radio" aria-checked="false" data-size="grande">Grande<small>250+</small></button>
+      </div>
+
+      <!-- Famiglia «Aziende»: piani per numero di addetti e di utenti -->
+      <div class="fam-pan" role="tabpanel" id="pan-az" aria-labelledby="tab-az">
+        <div class="calc-ctl">
+          <div class="ctl">
+            <label for="users">Persone che usano Maistu</label>
+            <div class="range-row"><input type="range" id="users" min="1" max="51" value="6"><output id="usersOut" class="mono" for="users">6</output></div>
+          </div>
+          <div class="ctl">
+            <span class="ctl-l" id="sizeL">Dimensione dell'azienda</span>
+            <div class="seg seg-4" role="radiogroup" aria-labelledby="sizeL" id="size">
+              <button type="button" role="radio" aria-checked="true" data-size="micro">Micro<small>fino a 9 addetti</small></button>
+              <button type="button" role="radio" aria-checked="false" data-size="piccola">Piccola<small>10–49</small></button>
+              <button type="button" role="radio" aria-checked="false" data-size="media">Media<small>50–249</small></button>
+              <button type="button" role="radio" aria-checked="false" data-size="grande">Grande<small>250+</small></button>
+            </div>
           </div>
         </div>
+        <div class="quote" id="quote" hidden>
+          <div><p class="eyebrow">Su quotazione</p><h3 id="quoteT">Per un'azienda della tua dimensione prepariamo un'offerta dedicata.</h3><p>Oltre 50 utenti o 250 addetti servono configurazioni, sedi e assistenza pensate apposta. Un nostro commerciale ti prepara la quotazione.</p></div>
+          <a class="btn btn-or" href="#contatti" data-tipo="Preventivo Enterprise">Richiedi la quotazione</a>
+        </div>
+        <div class="plans plans-4" id="plans"></div>
       </div>
-      <div class="quote" id="quote" hidden>
-        <div><p class="eyebrow">Su quotazione</p><h3 id="quoteT">Per un'azienda della tua dimensione prepariamo un'offerta dedicata.</h3><p>Oltre 50 utenti o 250 addetti servono configurazioni, sedi e assistenza pensate apposta. Un nostro commerciale ti prepara la quotazione.</p></div>
-        <a class="btn btn-or" href="#contatti" data-tipo="Preventivo Enterprise">Richiedi la quotazione</a>
+
+      <!-- Famiglia «Ospitalità»: prezzo per camera o alloggio, con un minimo mensile -->
+      <div class="fam-pan" role="tabpanel" id="pan-os" aria-labelledby="tab-os" hidden>
+        <div class="calc-ctl calc-ctl-os">
+          <div class="ctl">
+            <span class="ctl-l" id="hTypeL">La tua struttura</span>
+            <div class="seg seg-2" role="radiogroup" aria-labelledby="hTypeL" id="hType">
+              <button type="button" role="radio" aria-checked="true" data-h="bb">B&amp;B e case vacanza<small>a alloggio</small></button>
+              <button type="button" role="radio" aria-checked="false" data-h="hotel">Alberghi<small>a camera</small></button>
+            </div>
+          </div>
+          <div class="ctl">
+            <label for="units" id="unitsL">Quante camere o alloggi</label>
+            <div class="range-row"><input type="range" id="units" min="1" max="120" value="10"><output id="unitsOut" class="mono" for="units">10</output></div>
+          </div>
+          <div class="ctl">
+            <label for="hUsers">Persone che usano Maistu</label>
+            <div class="range-row"><input type="range" id="hUsers" min="1" max="30" value="3"><output id="hUsersOut" class="mono" for="hUsers">3</output></div>
+          </div>
+        </div>
+        <div class="quote" id="hQuote" hidden>
+          <div><p class="eyebrow">Su quotazione</p><h3>Oltre 120 camere o alloggi prepariamo un'offerta dedicata.</h3><p>Per strutture grandi o con più sedi servono configurazioni e assistenza pensate apposta. Un nostro commerciale ti prepara la quotazione.</p></div>
+          <a class="btn btn-or" href="#contatti" data-tipo="Preventivo Enterprise">Richiedi la quotazione</a>
+        </div>
+        <div class="hosp">
+          <div class="plans plans-2" id="hPlans"></div>
+          <aside class="hosp-inc" aria-labelledby="hIncT">
+            <p class="eyebrow" id="hIncT">Sempre incluso</p>
+            <ul id="hInc"></ul>
+          </aside>
+        </div>
+        <div class="hosp-ex">
+          <p class="ctl-l" id="hExL">Qualche esempio, al mese (IVA esclusa)</p>
+          <div class="hosp-ex-list" id="hEx" role="group" aria-labelledby="hExL"></div>
+          <p class="tiny muted">Il minimo mensile vale solo per camere e alloggi: utenti in più e moduli aggiuntivi si sommano.</p>
+        </div>
       </div>
-      <div class="plans" id="plans"></div>
-      <p class="tiny muted plans-note">Prezzi IVA esclusa. Con la fatturazione annuale paghi 10 mesi su 12.</p>
+
+      <div class="plans-rules">
+        <p><b>Cambi quando vuoi.</b> Puoi cambiare piano quando vuoi: aggiungere utenti, passare a un piano più grande o aggiungere moduli in qualsiasi momento; con l'annuale paghi la differenza per i mesi che restano.</p>
+        <!-- DA CONFERMARE CON IL LEGALE: i giorni di preavviso del rinnovo vengono da PRICING.rinnovoAvvisoGiorni in site.js (oggi 30). -->
+        <p><b>Annuale.</b> 10 mensilità pagate in anticipo, rinnovo con avviso <span data-pr="avviso">30</span> giorni prima; puoi disdire il rinnovo quando vuoi.</p>
+        <p class="tiny muted">Tutti i prezzi sono IVA esclusa. Con la fatturazione annuale paghi 10 mesi su 12, per i piani e per i moduli.</p>
+      </div>
     </div>
 
     <div class="addons rv">
       <div class="addons-head">
         <h3>Moduli aggiuntivi</h3>
-        <p class="muted">Aggiungili al piano scelto: il totale si aggiorna qui sopra. Questi sono i più richiesti, gli altri li costruiamo su misura.</p>
+        <p class="muted">A fasce di prezzo: aggiungili al piano scelto e il totale si aggiorna qui sopra. Con l'annuale anche i moduli costano 10 mesi su 12.</p>
       </div>
-      <div class="addon-list" id="addons"></div>
+      <div class="tiers" id="addons"></div>
     </div>
 
     <div class="enterprise rv">
@@ -438,6 +491,10 @@
       <details><summary>Fa la fattura elettronica?</summary><p>Sì. Maistu emette fatture elettroniche e note di credito, le invia allo SDI e ne segue lo stato. Puoi anche condividerle con il tuo commercialista.</p></details>
       <details><summary>Dove stanno i miei dati?</summary><p>Nella versione cloud, su server in Unione Europea, con backup giornalieri. Con la licenza completa puoi installarlo anche nei tuoi server.</p></details>
       <details><summary>Posso partire piccolo?</summary><p>Certo. Molti clienti partono con ordini e magazzino e aggiungono documenti, canali o Jana nei mesi successivi.</p></details>
+      <details><summary>Posso cambiare piano?</summary><p>Puoi cambiare piano quando vuoi: aggiungere utenti, passare a un piano più grande o aggiungere moduli in qualsiasi momento; con l'annuale paghi la differenza per i mesi che restano.</p></details>
+      <!-- DA CONFERMARE CON IL LEGALE: giorni di preavviso del rinnovo, da PRICING.rinnovoAvvisoGiorni in site.js. -->
+      <details><summary>Come funziona la fatturazione annuale?</summary><p>Annuale: 10 mensilità pagate in anticipo, rinnovo con avviso <span data-pr="avviso">30</span> giorni prima; puoi disdire il rinnovo quando vuoi. Vale per il piano e per i moduli aggiuntivi: in pratica due mesi sono gratis.</p></details>
+      <details><summary>Ho un B&amp;B o un albergo: come si calcola il prezzo?</summary><p>Con i piani Ospitalità paghi per camera o alloggio: <span data-pr="osp-bb">€ 6 al mese per alloggio per B&amp;B e case vacanza (minimo € 39)</span>, <span data-pr="osp-hotel">€ 4 al mese per camera per gli alberghi (minimo € 99)</span>, IVA esclusa. Sono compresi il gestionale, il modulo ospitalità con planning e check-in online, gli adempimenti, i messaggi agli ospiti e il sito con la prenotazione online.</p></details>
       <details><summary>Funziona dal telefono?</summary><p>Sì, da browser su computer, tablet e telefono. Per chi lavora fuori sede c'è anche l'app con le funzioni che servono in giro.</p></details>
       <details><summary>Chi è Jana?</summary><p>È l'assistente AI di Domotty. In Maistu risponde alle tue domande e svolge compiti al posto tuo, a voce o per iscritto. Con la domotica Domotty comanda anche luci, clima, scenari e sicurezza. Il nome viene dal sardo: la <em>jana</em> è la fata del folklore isolano.</p></details>
       <details><summary>Chi mi aiuta se qualcosa non va?</summary><p>Il team Domotty, da San Sperate. Al telefono, su WhatsApp o per email, con persone che conoscono il tuo progetto.</p></details>

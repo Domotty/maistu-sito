@@ -450,7 +450,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--or);box-
 /* ---------- prezzi ---------- */
 .placeholder-note{color:var(--or-tx);font-size:11px;border:1px dashed var(--or);border-radius:8px;padding:6px 10px;justify-self:start}
 .calc{display:grid;gap:var(--s3)}
-.calc-ctl{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1.4fr);gap:var(--s3);align-items:end;background:var(--sf1);border:1px solid var(--b1);border-radius:var(--r-l);padding:var(--s2) var(--s3)}
+.calc-ctl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:var(--s3);align-items:end;background:var(--sf1);border:1px solid var(--b1);border-radius:var(--r-l);padding:var(--s2) var(--s3)}
 .ctl{display:grid;gap:10px;min-width:0}
 .ctl label,.ctl-l{font-size:14px;color:var(--t2);font-weight:500}
 .range-row{display:flex;align-items:center;gap:14px}
@@ -466,7 +466,7 @@ input[type=range]:focus{box-shadow:none}
 .seg .save{font-size:10.5px;color:var(--or-tx);font-weight:600}
 .seg-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
 .plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2);align-items:stretch}
-.plan{position:relative;background:var(--sf1);border:1px solid var(--b1);border-radius:var(--r-l);padding:var(--s3) var(--s2) var(--s2);display:grid;gap:14px;grid-template-rows:auto auto auto 1fr auto;transition:transform .4s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s}
+.plan{position:relative;background:var(--sf1);border:1px solid var(--b1);border-radius:var(--r-l);padding:var(--s3) var(--s2) var(--s2);display:grid;gap:14px;grid-template-rows:auto auto auto auto 1fr auto;transition:transform .4s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s}
 .plan.reco{border-color:var(--or);box-shadow:0 30px 80px -40px rgba(247,132,42,.55);transform:translateY(-8px)}
 .plan .badge{position:absolute;top:-12px;left:var(--s2);background:var(--or);color:var(--on-or);font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;padding:4px 10px;border-radius:999px;opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s}
 .plan.reco .badge{opacity:1;transform:none}
@@ -483,7 +483,9 @@ input[type=range]:focus{box-shadow:none}
 .plan li.no::before{background:var(--b2)}
 .plan .btn{width:100%}
 .plan.na{opacity:.55}
-.plan.na .price .n{font-size:26px}
+.plan.na .price .n{font-size:20px;line-height:1.3;letter-spacing:-.01em}
+.btn-off{cursor:not-allowed;color:var(--t3);border-style:dashed;white-space:normal;text-align:center}
+.btn-off:hover{color:var(--t3);border-color:var(--b2)}
 .addons{margin-top:var(--s4)}
 .addons-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px;margin-bottom:var(--s2)}
 .addons-head h3{font-size:24px}
@@ -611,12 +613,59 @@ input[type=range]:focus{box-shadow:none}
 .quote{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--s2);align-items:center;padding:var(--s2) var(--s3);border-radius:var(--r-l);border:1px solid var(--or);background:radial-gradient(circle at 100% 0,color-mix(in srgb,var(--or) 22%,transparent),transparent 60%),var(--sf1);animation:fadeUp .5s both}
 .quote h3{font-size:clamp(20px,2.2vw,26px);margin-block:8px}
 .quote p:not(.eyebrow){color:var(--t2);max-width:62ch}
+.quote[hidden]{display:none}
 .plans.dim .plan{opacity:.42;filter:saturate(.6)}
 .plans-note{margin-top:-10px}
 .addon-custom{grid-column:1 / -1;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s2);align-items:center;border-style:dashed}
 .ac-l{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px}
 .ac-l .ad{grid-column:1 / -1}
 .ac-r{font-size:13.5px;color:var(--t2);line-height:1.5;padding-left:var(--s2);border-left:1px solid var(--b1)}
+/* famiglie di piani: Aziende e Ospitalità */
+.calc-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s1) var(--s2)}
+.fam{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;flex:1 1 520px;max-width:680px}
+.fam button{position:relative;overflow:hidden;text-align:left;display:grid;gap:2px;background:transparent;border:1px solid var(--b1);border-radius:var(--r);padding:14px 20px 16px;cursor:pointer;transition:border-color .3s,background .3s}
+.fam button::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--or);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.fam button:hover{border-color:var(--b2)}
+.fam button[aria-selected="true"]{background:var(--sf1);border-color:var(--b2)}
+.fam button[aria-selected="true"]::after{transform:none}
+.fam .ft{font-weight:600;font-size:18px}
+.fam .fd{font-size:13.5px;color:var(--t3);line-height:1.4}
+.fam-pan{display:grid;gap:var(--s3)}
+.fam-pan[hidden]{display:none}
+.fam-pan > *{animation:fadeUp .45s cubic-bezier(.2,.8,.2,1) both}
+.calc-ctl-os{grid-template-columns:auto minmax(0,1fr) minmax(0,1fr)}
+.seg-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.plans-4{grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s1)}
+.plans-4 .plan{padding:var(--s3) 20px 20px}
+.plans-4 .price .n{font-size:40px}
+.plans-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.plan li b{color:var(--fg);font-weight:600}
+.plan li.calc-line{font-variant-numeric:tabular-nums;color:var(--t3);font-size:13.5px}
+.plan li.calc-line::before{background:transparent;border:1.5px solid var(--or)}
+.hosp{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:var(--s2);align-items:stretch}
+.hosp-inc{background:var(--sf2);border:1px solid var(--b1);border-radius:var(--r-l);padding:var(--s2);display:grid;gap:14px;align-content:start}
+.hosp-inc ul{list-style:none;margin:0;padding:0;display:grid;gap:9px;font-size:14px;color:var(--t2);line-height:1.5}
+.hosp-inc li{display:flex;gap:10px}
+.hosp-inc li::before{content:"";flex:none;width:8px;height:8px;margin-top:7px;border-radius:2px;background:var(--or)}
+.hosp-ex{display:grid;gap:10px}
+.hosp-ex-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.ex{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 10px;align-items:baseline;text-align:left;background:var(--sf1);border:1px dashed var(--b2);border-radius:var(--r);padding:12px 14px;cursor:pointer;font-size:14px;color:var(--t2);transition:border-color .25s}
+.ex:hover{border-color:var(--or)}
+.ex b{font-variant-numeric:tabular-nums;color:var(--or-tx);font-size:16px}
+.ex small{grid-column:1 / -1;font-size:12px;color:var(--t3)}
+.plans-rules{display:grid;gap:8px;padding:var(--s1) var(--s2);border-left:3px solid var(--or);background:var(--sf1);border-radius:0 var(--r) var(--r) 0;font-size:14.5px;color:var(--t2)}
+.plans-rules p + p{margin-top:0}
+.plans-rules b{color:var(--fg);font-weight:600}
+/* moduli a fasce: fascia → moduli */
+.tiers{display:grid;gap:12px}
+.tier{display:grid;grid-template-columns:200px minmax(0,1fr);gap:var(--s2);align-items:start;padding:var(--s1) 0 var(--s1);border-top:1px solid var(--b1)}
+.tier-h{display:grid;gap:2px;padding-top:6px}
+.tier-n{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--or-tx)}
+.tier-p{font-weight:600;font-size:20px;font-variant-numeric:tabular-nums}
+.tier-p small{display:block;font-size:13px;font-weight:400;color:var(--t3);line-height:1.3}
+.tier-d{font-size:13px;color:var(--t3);line-height:1.45}
+.tier-mods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.tiers .addon-custom{margin-top:var(--s1)}
 
 /* ---------- prova 15 giorni ---------- */
 .prova{padding-block:var(--s5)}
@@ -645,8 +694,15 @@ input[type=range]:focus{box-shadow:none}
   .manifesto{grid-template-columns:repeat(2,minmax(0,1fr))}
   .sect-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .calc-ctl{grid-template-columns:1fr 1fr}
-  .calc-ctl .seg:first-child{grid-column:1 / -1;justify-self:start}
+  .calc-ctl-os .ctl:first-child{grid-column:1 / -1}
   .addon-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .plans-4{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s2)}
+  .plans-4 .plan.reco{transform:none}
+  .hosp{grid-template-columns:minmax(0,1fr)}
+  .hosp-ex-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tier{grid-template-columns:minmax(0,1fr);gap:10px}
+  .tier-h{grid-template-columns:auto auto minmax(0,1fr);align-items:baseline;column-gap:14px}
+  .tier-mods{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width: 900px){
   :root{--nav-h:60px}
@@ -715,7 +771,20 @@ input[type=range]:focus{box-shadow:none}
   .sectors{grid-template-columns:1fr 1fr}
   .contact-list li{grid-template-columns:minmax(0,1fr);gap:0}
   .form{padding:var(--s2)}
-  .price .n{font-size:38px}
+  .price .n,.plans-4 .price .n{font-size:38px}
+  .calc-top{display:grid;grid-template-columns:minmax(0,1fr)}
+  .fam{max-width:none}
+  .fam button{padding:12px 14px 14px}
+  .fam .ft{font-size:16.5px}
+  .fam .fd{font-size:12.5px}
+  #billing{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .calc-ctl-os{grid-template-columns:minmax(0,1fr)}
+  .plans-rules{padding:var(--s1)}
+  .tier-h{grid-template-columns:auto minmax(0,1fr)}
+  .tier-d{grid-column:1 / -1}
+  .tier-mods{grid-template-columns:minmax(0,1fr)}
+  .tier-p small{display:inline}
+  .hosp-ex-list{grid-template-columns:minmax(0,1fr)}
   .sect{min-height:0}
 }
 
