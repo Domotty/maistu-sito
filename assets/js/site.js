@@ -1023,6 +1023,8 @@
     });
     var famDaHash = { '#ospitalita': 'os', '#benessere': 'be', '#salute': 'sa' }[location.hash], famSalvata = store.get('maistu-famiglia', true);
     setFam(famDaHash || (['os', 'be', 'sa'].indexOf(famSalvata) > -1 ? famSalvata : 'az'));
+    // #ospitalita, #benessere e #salute aprono la loro linguetta e portano ai prezzi
+    if (famDaHash) setTimeout(function () { var pz = $('#prezzi'); if (pz) pz.scrollIntoView(); }, 60);
     renderAll();
   }
   // I pulsanti di piani, quotazioni e moduli precompilano il modulo contatti.
