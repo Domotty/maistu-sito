@@ -44,7 +44,7 @@ function invio(sito: Sito) {
 }
 const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]!));
 function confirmEmailMaistu(link: string, site: string) {
-  const text = `Ciao!\n\nGrazie per esserti iscritto alle novità di Maistu.\nPer confermare l'iscrizione apri questo link:\n${link}\n\nSe non sei stato tu, ignora questa email: senza conferma non riceverai nulla.\n\nMaistu è il gestionale su misura di Domotty.\nDomotty S.r.l. · Via Monsignor Cherchi 26, 09027 San Sperate (CA)\nInformativa privacy: ${site}/privacy.html`;
+  const text = `Ciao!\n\nGrazie per esserti iscritto alle novità di Maistu.\nPer confermare l'iscrizione apri questo link:\n${link}\n\nSe non sei stato tu, ignora questa email: senza conferma non riceverai nulla.\n\nMaistu è il gestionale su misura di Domotty.\nDomotty S.r.l. · Via Monsignor Cherchi 26, 09026 San Sperate (CA)\nInformativa privacy: ${site}/privacy.html`;
   const html = `<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="dark light"><title>Conferma la tua iscrizione</title></head>
 <body style="margin:0;padding:0;background:#0B1A33;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0B1A33;"><tr><td align="center" style="padding:28px 16px 36px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:584px;">
@@ -58,13 +58,13 @@ function confirmEmailMaistu(link: string, site: string) {
 <table role="presentation" cellpadding="0" cellspacing="0" style="margin:12px 0 6px;"><tr><td style="background:#F7842A;border-radius:999px;"><a href="${esc(link)}" style="display:inline-block;padding:13px 26px;color:#0B1A33;font-family:Poppins,Arial,Helvetica,sans-serif;font-size:15px;font-weight:700;text-decoration:none;">Conferma l'iscrizione</a></td></tr></table>
 <p style="margin:18px 0 0;color:#93A3BE;font-size:13px;line-height:1.5;">Se non sei stato tu, ignora questa email: senza conferma non riceverai nulla.</p>
 </td></tr></table></td></tr>
-<tr><td style="padding:18px 6px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#93A3BE;"><span style="color:#C3CEE0;">Maistu</span> è il gestionale su misura di Domotty.<br>Domotty S.r.l. · Via Monsignor Cherchi 26, 09027 San Sperate (CA)<br><a href="${site}" style="color:#F7842A;text-decoration:none;">maistu.it</a> · <a href="${site}/privacy.html" style="color:#F7842A;">Informativa privacy</a></td></tr>
+<tr><td style="padding:18px 6px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#93A3BE;"><span style="color:#C3CEE0;">Maistu</span> è il gestionale su misura di Domotty.<br>Domotty S.r.l. · Via Monsignor Cherchi 26, 09026 San Sperate (CA)<br><a href="${site}" style="color:#F7842A;text-decoration:none;">maistu.it</a> · <a href="${site}/privacy.html" style="color:#F7842A;">Informativa privacy</a></td></tr>
 </table></td></tr></table></body></html>`;
   return { text, html };
 }
 // Email «sei già iscritto» · Domotty
 function alreadyDomotty(unsub: string) {
-  const text = `Ciao!\n\nAbbiamo ricevuto una nuova richiesta di iscrizione per questo indirizzo, ma sei già iscritto alla newsletter Domotty: non devi fare nulla.\n\nSe non vuoi più riceverla, puoi disiscriverti qui:\n${unsub}\n\nDomotty S.r.l. · Via Monsignor Cherchi 26, 09027 San Sperate (CA)\nInformativa privacy: ${SITE}/privacy.html`;
+  const text = `Ciao!\n\nAbbiamo ricevuto una nuova richiesta di iscrizione per questo indirizzo, ma sei già iscritto alla newsletter Domotty: non devi fare nulla.\n\nSe non vuoi più riceverla, puoi disiscriverti qui:\n${unsub}\n\nDomotty S.r.l. · Via Monsignor Cherchi 26, 09026 San Sperate (CA)\nInformativa privacy: ${SITE}/privacy.html`;
   const html = `<div style="background:#0B1A33;padding:36px 16px;font-family:Arial,sans-serif">
   <div style="max-width:520px;margin:0 auto;background:#10223F;border-radius:20px;padding:32px;color:#C3CEE0">
     <p style="font-size:13px;letter-spacing:4px;color:#F7842A;font-weight:bold;margin:0 0 18px">DOMOTTY</p>
@@ -72,13 +72,13 @@ function alreadyDomotty(unsub: string) {
     <p style="font-size:15px;line-height:1.6;margin:0 0 14px">Abbiamo ricevuto una nuova richiesta di iscrizione per questo indirizzo, ma sei già iscritto alla newsletter Domotty: non devi fare nulla, continuerai a riceverla.</p>
     <p style="font-size:13px;line-height:1.6;margin:22px 0 0;color:#93A3BE">Se non vuoi più riceverla, <a href="${unsub}" style="color:#F7842A">puoi disiscriverti qui</a>.</p>
   </div>
-  <p style="max-width:520px;margin:16px auto 0;font-size:12px;color:#93A3BE;text-align:center">Domotty S.r.l. · Via Monsignor Cherchi 26, 09027 San Sperate (CA) · <a href="${SITE}/privacy.html" style="color:#F7842A">Informativa privacy</a></p>
+  <p style="max-width:520px;margin:16px auto 0;font-size:12px;color:#93A3BE;text-align:center">Domotty S.r.l. · Via Monsignor Cherchi 26, 09026 San Sperate (CA) · <a href="${SITE}/privacy.html" style="color:#F7842A">Informativa privacy</a></p>
 </div>`;
   return { subject: "Sei già iscritto alla newsletter Domotty", text, html };
 }
 // Email «sei già iscritto» · Maistu
 function alreadyMaistu(unsub: string, site: string) {
-  const text = `Ciao!\n\nAbbiamo ricevuto una nuova richiesta di iscrizione per questo indirizzo, ma sei già iscritto alle novità di Maistu: non devi fare nulla.\n\nSe non vuoi più riceverle, puoi disiscriverti qui:\n${unsub}\n\nMaistu è il gestionale su misura di Domotty.\nDomotty S.r.l. · Via Monsignor Cherchi 26, 09027 San Sperate (CA)\nInformativa privacy: ${site}/privacy.html`;
+  const text = `Ciao!\n\nAbbiamo ricevuto una nuova richiesta di iscrizione per questo indirizzo, ma sei già iscritto alle novità di Maistu: non devi fare nulla.\n\nSe non vuoi più riceverle, puoi disiscriverti qui:\n${unsub}\n\nMaistu è il gestionale su misura di Domotty.\nDomotty S.r.l. · Via Monsignor Cherchi 26, 09026 San Sperate (CA)\nInformativa privacy: ${site}/privacy.html`;
   const html = confirmEmailMaistu("", site).html
     .replace("<title>Conferma la tua iscrizione</title>", "<title>Sei già iscritto</title>")
     .replace(/<h1([^>]*)>Conferma la tua iscrizione<\/h1>/, "<h1$1>Sei già iscritto!</h1>")
@@ -90,7 +90,7 @@ function alreadyMaistu(unsub: string, site: string) {
 const token = () => crypto.randomUUID().replaceAll("-", "") + crypto.randomUUID().replaceAll("-", "").slice(0, 8);
 
 function confirmEmail(link: string) {
-  const text = `Ciao!\n\nGrazie per esserti iscritto alla newsletter Domotty.\nPer confermare l'iscrizione apri questo link:\n${link}\n\nSe non sei stato tu, ignora questa email: senza conferma non riceverai nulla.\n\nDomotty S.r.l. · Via Monsignor Cherchi 26, 09027 San Sperate (CA)\nInformativa privacy: ${SITE}/privacy.html`;
+  const text = `Ciao!\n\nGrazie per esserti iscritto alla newsletter Domotty.\nPer confermare l'iscrizione apri questo link:\n${link}\n\nSe non sei stato tu, ignora questa email: senza conferma non riceverai nulla.\n\nDomotty S.r.l. · Via Monsignor Cherchi 26, 09026 San Sperate (CA)\nInformativa privacy: ${SITE}/privacy.html`;
   const html = `<div style="background:#0B1A33;padding:36px 16px;font-family:Arial,sans-serif">
   <div style="max-width:520px;margin:0 auto;background:#10223F;border-radius:20px;padding:32px;color:#C3CEE0">
     <p style="font-size:13px;letter-spacing:4px;color:#F7842A;font-weight:bold;margin:0 0 18px">DOMOTTY</p>
@@ -99,7 +99,7 @@ function confirmEmail(link: string) {
     <a href="${link}" style="display:inline-block;background:#F7842A;color:#0B1A33;text-decoration:none;font-weight:bold;padding:14px 26px;border-radius:999px">Conferma l'iscrizione</a>
     <p style="font-size:13px;line-height:1.6;margin:24px 0 0;color:#93A3BE">Se non sei stato tu, ignora questa email: senza conferma non riceverai nulla.</p>
   </div>
-  <p style="max-width:520px;margin:16px auto 0;font-size:12px;color:#93A3BE;text-align:center">Domotty S.r.l. · Via Monsignor Cherchi 26, 09027 San Sperate (CA) · <a href="${SITE}/privacy.html" style="color:#F7842A">Informativa privacy</a></p>
+  <p style="max-width:520px;margin:16px auto 0;font-size:12px;color:#93A3BE;text-align:center">Domotty S.r.l. · Via Monsignor Cherchi 26, 09026 San Sperate (CA) · <a href="${SITE}/privacy.html" style="color:#F7842A">Informativa privacy</a></p>
 </div>`;
   return { text, html };
 }
