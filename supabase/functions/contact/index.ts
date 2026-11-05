@@ -46,7 +46,10 @@ function conf(sito: Sito): Conf {
   return {
     sito, nome: "Domotty",
     tipi: ["Informazioni generali", "Domotica casa o ufficio", "Software su misura", "Gestionale e cloud PMI",
-      "Comunicazione omnicanale", "Soluzione per il mio settore", "AI CORE e automazione", "Testimonianza cliente"],
+      "Comunicazione omnicanale", "Soluzione per il mio settore", "AI CORE e automazione", "Testimonianza cliente",
+      // 5/11/2026: le candidature degli installatori partner (sezione «Installatori» di domotty.it); il gestionale ne fa
+      // una categoria dei contatti, come per gli altri tipi
+      "Richiesta collaborazione installatori"],
     mailTo: env("MAIL_TO", "assistenza@domotty.it"),
     mailFrom: env("MAIL_FROM"),
     siteUrl: env("SITE_URL", "https://domotty.it").replace(/\/$/, ""),

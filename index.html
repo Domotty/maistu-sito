@@ -355,7 +355,7 @@
     <div class="head rv">
       <p class="eyebrow">Piani e prezzi</p>
       <h2>Paghi la misura che ti serve.</h2>
-      <p class="lead">Un'azienda si misura in persone, una struttura ricettiva in camere. Scegli la tua famiglia di piani, indica quanto sei grande e guarda il conto.</p>
+      <p class="lead">Un'azienda si misura in persone, una struttura ricettiva in camere, un salone in operatori, uno studio in professionisti. Scegli la tua famiglia di piani, indica quanto sei grande e guarda il conto.</p>
     </div>
 
     <div class="calc rv" id="calc">
@@ -363,6 +363,8 @@
         <div class="fam" role="tablist" aria-label="Famiglia di piani" id="fam">
           <button type="button" role="tab" id="tab-az" aria-selected="true" aria-controls="pan-az" data-fam="az"><span class="ft">Aziende</span><span class="fd">Prezzo in base alle persone</span></button>
           <button type="button" role="tab" id="tab-os" aria-selected="false" aria-controls="pan-os" tabindex="-1" data-fam="os"><span class="ft">Ospitalità</span><span class="fd">B&amp;B, case vacanza e alberghi: prezzo a camera</span></button>
+          <button type="button" role="tab" id="tab-be" aria-selected="false" aria-controls="pan-be" tabindex="-1" data-fam="be"><span class="ft">Benessere <span class="new">Nuovo</span></span><span class="fd">Saloni a operatore, spa ad accessi</span></button>
+          <button type="button" role="tab" id="tab-sa" aria-selected="false" aria-controls="pan-sa" tabindex="-1" data-fam="sa"><span class="ft">Salute <span class="new">Nuovo</span></span><span class="fd">Studi e ambulatori: prezzo a professionista</span></button>
         </div>
         <div class="seg" role="radiogroup" aria-label="Fatturazione" id="billing">
           <button type="button" role="radio" aria-checked="true" data-bill="m">Mensile</button>
@@ -431,6 +433,81 @@
         </div>
       </div>
 
+
+      <!-- Famiglia «Benessere»: saloni per operatore (con un minimo), spa per accessi contemporanei (tre misure) -->
+      <div class="fam-pan" role="tabpanel" id="pan-be" aria-labelledby="tab-be" hidden>
+        <div class="calc-ctl calc-ctl-os">
+          <div class="ctl">
+            <span class="ctl-l" id="bTypeL">La tua attività</span>
+            <div class="seg seg-2" role="radiogroup" aria-labelledby="bTypeL" id="bType">
+              <button type="button" role="radio" aria-checked="true" data-b="saloni">Saloni ed estetica<small>a operatore</small></button>
+              <button type="button" role="radio" aria-checked="false" data-b="spa">Centri benessere e spa<small>ad accessi</small></button>
+            </div>
+          </div>
+          <div class="ctl">
+            <label for="bUnits" id="bUnitsL">Operatori in agenda</label>
+            <div class="range-row"><input type="range" id="bUnits" min="1" max="31" value="4"><output id="bUnitsOut" class="mono" for="bUnits">4</output></div>
+          </div>
+          <div class="ctl">
+            <label for="bUsers" id="bUsersL">Persone alla reception</label>
+            <div class="range-row"><input type="range" id="bUsers" min="0" max="15" value="0"><output id="bUsersOut" class="mono" for="bUsers">0</output></div>
+          </div>
+        </div>
+        <div class="quote" id="bQuote" hidden>
+          <div><p class="eyebrow">Su quotazione</p><h3 id="bQuoteT">Per un centro della tua dimensione prepariamo un'offerta dedicata.</h3><p>Per strutture grandi o con più sedi servono configurazioni e assistenza pensate apposta. Un nostro commerciale ti prepara la quotazione.</p></div>
+          <a class="btn btn-or" href="#contatti" data-tipo="Preventivo Enterprise">Richiedi la quotazione</a>
+        </div>
+        <div class="hosp">
+          <div class="plans plans-3" id="bPlans"></div>
+          <aside class="hosp-inc" aria-labelledby="bIncT">
+            <p class="eyebrow" id="bIncT">Sempre incluso</p>
+            <ul id="bInc"></ul>
+          </aside>
+        </div>
+        <div class="hosp-ex">
+          <p class="ctl-l" id="bExL">Qualche esempio, al mese (IVA esclusa)</p>
+          <div class="hosp-ex-list" id="bEx" role="group" aria-labelledby="bExL"></div>
+          <p class="tiny muted">Saloni: il minimo mensile vale solo per gli operatori; ogni operatore ha il suo accesso, chi lavora solo alla reception costa <span data-pr="extra">12</span> € al mese. Spa: ogni misura comprende un certo numero di persone dello staff, poi <span data-pr="extra">12</span> € ciascuna. I moduli aggiuntivi si sommano.</p>
+        </div>
+      </div>
+
+      <!-- Famiglia «Salute»: prezzo per professionista con agenda, con un minimo mensile -->
+      <div class="fam-pan" role="tabpanel" id="pan-sa" aria-labelledby="tab-sa" hidden>
+        <div class="calc-ctl calc-ctl-os">
+          <div class="ctl">
+            <span class="ctl-l" id="sTypeL">Il tuo studio</span>
+            <div class="seg seg-2" role="radiogroup" aria-labelledby="sTypeL" id="sType">
+              <button type="button" role="radio" aria-checked="true" data-s="studi">Studi e professionisti<small>a professionista</small></button>
+              <button type="button" role="radio" aria-checked="false" data-s="poli">Poliambulatori e cliniche<small>per i centri più grandi</small></button>
+            </div>
+          </div>
+          <div class="ctl">
+            <label for="sUnits">Professionisti con agenda</label>
+            <div class="range-row"><input type="range" id="sUnits" min="1" max="61" value="3"><output id="sUnitsOut" class="mono" for="sUnits">3</output></div>
+          </div>
+          <div class="ctl">
+            <label for="sUsers">Persone in segreteria</label>
+            <div class="range-row"><input type="range" id="sUsers" min="0" max="20" value="2"><output id="sUsersOut" class="mono" for="sUsers">2</output></div>
+          </div>
+        </div>
+        <div class="quote" id="sQuote" hidden>
+          <div><p class="eyebrow">Su quotazione</p><h3>Oltre 60 professionisti prepariamo un'offerta dedicata.</h3><p>Per cliniche grandi o con più sedi servono configurazioni e assistenza pensate apposta. Un nostro commerciale ti prepara la quotazione.</p></div>
+          <a class="btn btn-or" href="#contatti" data-tipo="Preventivo Enterprise">Richiedi la quotazione</a>
+        </div>
+        <div class="hosp">
+          <div class="plans plans-2" id="sPlans"></div>
+          <aside class="hosp-inc" aria-labelledby="sIncT">
+            <p class="eyebrow" id="sIncT">Sempre incluso</p>
+            <ul id="sInc"></ul>
+          </aside>
+        </div>
+        <div class="hosp-ex">
+          <p class="ctl-l" id="sExL">Qualche esempio, al mese (IVA esclusa)</p>
+          <div class="hosp-ex-list" id="sEx" role="group" aria-labelledby="sExL"></div>
+          <p class="tiny muted">Il minimo mensile vale solo per i professionisti. Sono comprese 2 persone in segreteria, poi <span data-pr="extra">12</span> € ciascuna; i moduli aggiuntivi si sommano.</p>
+        </div>
+      </div>
+
       <div class="plans-rules">
         <p><b>Cambi quando vuoi.</b> Puoi cambiare piano quando vuoi: aggiungere utenti, passare a un piano più grande o aggiungere moduli in qualsiasi momento; con l'annuale paghi la differenza per i mesi che restano.</p>
         <!-- DA CONFERMARE CON IL LEGALE: i giorni di preavviso del rinnovo vengono da PRICING.rinnovoAvvisoGiorni in site.js (oggi 30). -->
@@ -495,6 +572,8 @@
       <!-- DA CONFERMARE CON IL LEGALE: giorni di preavviso del rinnovo, da PRICING.rinnovoAvvisoGiorni in site.js. -->
       <details><summary>Come funziona la fatturazione annuale?</summary><p>Annuale: 10 mensilità pagate in anticipo, rinnovo con avviso <span data-pr="avviso">30</span> giorni prima; puoi disdire il rinnovo quando vuoi. Vale per il piano e per i moduli aggiuntivi: in pratica due mesi sono gratis.</p></details>
       <details><summary>Ho un B&amp;B o un albergo: come si calcola il prezzo?</summary><p>Con i piani Ospitalità paghi per camera o alloggio: <span data-pr="osp-bb">€ 6 al mese per alloggio per B&amp;B e case vacanza (minimo € 39)</span>, <span data-pr="osp-hotel">€ 4 al mese per camera per gli alberghi (minimo € 99)</span>, IVA esclusa. Sono compresi il gestionale, il modulo ospitalità con planning e check-in online, gli adempimenti, i messaggi agli ospiti e il sito con la prenotazione online.</p></details>
+      <details><summary>Ho un salone, un centro estetico o una spa: quanto costa?</summary><p>Con i piani Benessere: <span data-pr="be-saloni">€ 12 al mese per operatore per saloni ed estetica (minimo € 39)</span>; per le spa si sceglie la misura dagli accessi contemporanei: <span data-pr="be-spa">piccola fino a 8 accessi € 49, media fino a 20 € 89, grande fino a 40 € 129</span>, IVA esclusa. Sono compresi agenda, prenotazione online dal telefono, promemoria su WhatsApp e SMS, schede clienti con lo storico, pacchetti e carte regalo.</p></details>
+      <details><summary>Ho uno studio medico, dentistico o veterinario: come funziona?</summary><p>Con i piani Salute paghi per professionista con agenda: <span data-pr="sa-studi">€ 29 al mese per studi e professionisti (minimo € 49)</span>, <span data-pr="sa-poli">€ 19 al mese per poliambulatori e cliniche (minimo € 199)</span>, IVA esclusa. Sono compresi prenotazione online per i pazienti, promemoria, cartella del paziente, consensi firmati sul tablet, fatture sanitarie e invio al Sistema Tessera Sanitaria. I dati sanitari sono cifrati e ogni accesso è registrato.</p></details>
       <details><summary>Funziona dal telefono?</summary><p>Sì, da browser su computer, tablet e telefono. Per chi lavora fuori sede c'è anche l'app con le funzioni che servono in giro.</p></details>
       <details><summary>Chi è Jana?</summary><p>È l'assistente AI di Domotty. In Maistu risponde alle tue domande e svolge compiti al posto tuo, a voce o per iscritto. Con la domotica Domotty comanda anche luci, clima, scenari e sicurezza. Il nome viene dal sardo: la <em>jana</em> è la fata del folklore isolano.</p></details>
       <details><summary>Chi mi aiuta se qualcosa non va?</summary><p>Il team Domotty, da San Sperate. Al telefono, su WhatsApp o per email, con persone che conoscono il tuo progetto.</p></details>
