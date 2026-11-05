@@ -331,7 +331,8 @@
     affitti: '<path d="M3 11 12 4l9 7M5 10v10h14V10M10 20v-5h4v5" />',
     retail: '<path d="M4 7h16l-1.5 12a2 2 0 0 1-2 1.8h-9a2 2 0 0 1-2-1.8L4 7ZM9 7a3 3 0 0 1 6 0" />',
     studi: '<path d="M4 7h16v12H4zM9 7V5h6v2M4 12h16" />',
-    salute: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10ZM9 11h6M12 8v6" />',
+    benessere: '<path d="M6 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM6 16a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM7.6 7.2 20 18M7.6 16.8 20 6" />',
+    salute: '<path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z" />',
     logistica: '<path d="M3 6h11v10H3zM14 10h4l3 3v3h-7M7 18.5a1.5 1.5 0 1 0 0-.01M17 18.5a1.5 1.5 0 1 0 0-.01" />',
     altro: '<path d="M12 5v14M5 12h14" />'
   };
@@ -387,16 +388,26 @@
       cust: ['Marco Pinna', 'Bottega Sarda', 'Hotel Sa Perda', 'Elena Usai', 'Trasporti Campidano', 'Dott.ssa Fenu'],
       prod: [['Consulenza oraria', 80, 0, 0], ['Dichiarazione redditi', 150, 0, 0], ['Contabilità mensile', 220, 0, 0], ['Pratica societaria', 450, 0, 0], ['Visura', 15, 0, 0], ['Parere scritto', 300, 0, 0]],
       ch: ['Studio', 'Area clienti', 'Email', 'WhatsApp'] },
-    salute: { label: 'Salute e benessere', co: 'Centro Armonia', desc: 'Agenda appuntamenti, promemoria, schede clienti e pacchetti, nel rispetto della privacy.', mods: ['Agenda', 'Schede clienti', 'Promemoria', 'Pacchetti'],
-      t: { orders: 'Appuntamenti', one: 'Nuovo appuntamento', clients: 'Schede clienti', stock: 'Prodotti e pacchetti', docs: 'Ricevute', channels: 'Prenotazioni' },
+    benessere: { label: 'Bellezza e benessere', co: 'Salone Mirto', desc: 'Agenda per operatore, prenotazioni dal telefono, promemoria su WhatsApp e lo storico di ogni cliente: colori, trattamenti, prodotti.', mods: ['Agenda', 'Schede clienti', 'Promemoria', 'Pacchetti'],
+      t: { orders: 'Appuntamenti', one: 'Nuovo appuntamento', clients: 'Schede clienti', stock: 'Prodotti e pacchetti', docs: 'Ricevute e fatture', channels: 'Prenotazioni' },
       x: [
-        { id: 'agenda', l: 'Agenda', cols: ['Ora', 'Appuntamento', 'Stato'], rows: [['09:00', 'Massaggio · Laura B.', 'ok', 'Confermato'], ['10:30', 'Fisioterapia · Paolo D.', 'prep', 'In attesa'], ['12:00', 'Trattamento viso · Sara L.', 'ok', 'Confermato'], ['15:00', 'Libero', 'new', 'Prenotabile']] },
-        { id: 'pacchetti', l: 'Pacchetti e abbonamenti', cols: ['Cliente', 'Pacchetto', 'Stato'], rows: [['Laura Bianchi', '5 massaggi · 3 usati', 'ok', 'Attivo'], ['Paolo Deiana', '10 fisioterapie · 9 usate', 'bad', 'In esaurimento'], ['Sara Lilliu', 'Viso mensile', 'ok', 'Attivo'], ['Anna Keller', 'Buono regalo', 'new', 'Da usare']] },
-        { id: 'promemoria', l: 'Promemoria', cols: ['Cliente', 'Messaggio', 'Stato'], rows: [['Laura Bianchi', 'Domani alle 9:00', 'ok', 'Inviato su WhatsApp'], ['Paolo Deiana', 'Rinnovo pacchetto', 'prep', 'Programmato'], ['Federica Cocco', 'Ti aspettiamo!', 'new', 'Da inviare'], ['Giulia Serra', 'Auguri di compleanno', 'ok', 'Inviato']] }
+        { id: 'agenda', l: 'Agenda', cols: ['Ora', 'Appuntamento', 'Stato'], rows: [['09:00', 'Piega · Sara P. con Giulia', 'ok', 'Confermato'], ['10:30', 'Colore 6.34 · Anna L. con Giulia', 'ok', 'Confermato su WhatsApp'], ['11:00', 'Manicure · Rita F. con Lucia', 'prep', 'Da confermare'], ['15:00', 'Libero', 'new', 'Proposto alla lista d\'attesa']] },
+        { id: 'storico', l: 'Storico colori', cols: ['Cliente', 'Ultima formula', 'Stato'], rows: [['Anna Loi', '6.34 + ossidante 20 vol, 35 min', 'ok', '6 settimane fa'], ['Elena Serra', 'Meches 9.1, cartine', 'ok', '4 settimane fa'], ['Paola Cocco', '5.0 copertura bianchi', 'prep', 'Ricrescita: da richiamare'], ['Giorgia Melis', 'Gloss 8.32', 'ok', '2 settimane fa']] },
+        { id: 'pacchetti', l: 'Pacchetti e carte regalo', cols: ['Cliente', 'Pacchetto', 'Stato'], rows: [['Anna Loi', '5 pieghe · 3 usate', 'ok', 'Attivo'], ['Monica Sanna', '5 massaggi · 4 usati', 'bad', 'In esaurimento'], ['Laura Usai', 'Carta regalo 80 €', 'ok', 'Da usare'], ['Chiara Pisu', 'Ceretta mensile', 'ok', 'Attivo']] }
       ],
-      cust: ['Laura Bianchi', 'Paolo Deiana', 'Sara Lilliu', 'Giulia Serra', 'Anna Keller', 'Federica Cocco'],
-      prod: [['Massaggio 50 min', 55, 0, 0], ['Pacchetto 5 sedute', 240, 0, 0], ['Olio essenziale', 14, 9, 6], ['Crema viso', 32, 4, 6], ['Fisioterapia', 60, 0, 0], ['Buono regalo', 50, 20, 5]],
-      ch: ['Reception', 'Prenota online', 'Telefono', 'WhatsApp'] },
+      cust: ['Anna Loi', 'Elena Serra', 'Paola Cocco', 'Giorgia Melis', 'Monica Sanna', 'Laura Usai'],
+      prod: [['Colore e piega', 55, 0, 0], ['Taglio uomo', 18, 0, 0], ['Shampoo protezione colore', 16, 7, 6], ['Maschera ristrutturante', 22, 3, 5], ['Pacchetto 5 pieghe', 90, 0, 0], ['Carta regalo', 50, 20, 5]],
+      ch: ['Reception', 'Prenota online', 'WhatsApp', 'Telefono'] },
+    salute: { label: 'Studi medici e salute', co: 'Centro Medico Riu', desc: 'Agenda dei professionisti, prenotazione online, cartella del paziente, consensi e fatture sanitarie con il Sistema TS.', mods: ['Agenda', 'Cartella paziente', 'Consensi', 'Sistema TS'],
+      t: { orders: 'Visite', one: 'Nuova visita', clients: 'Pazienti', stock: 'Prestazioni e materiali', docs: 'Fatture sanitarie', channels: 'Prenotazioni' },
+      x: [
+        { id: 'agenda', l: 'Agenda', cols: ['Ora', 'Visita', 'Stato'], rows: [['08:30', 'Eco tiroide · R. Lai', 'ok', 'Fatta'], ['09:40', 'Eco addome · G. Pala', 'prep', 'In visita'], ['10:20', 'Eco mammaria · M. Piras', 'new', 'In sala d\'attesa'], ['11:20', 'Eco addome · I. Mereu', 'ok', 'Dalla lista d\'attesa']] },
+        { id: 'consensi', l: 'Consensi e referti', cols: ['Paziente', 'Documento', 'Stato'], rows: [['Giovanni Pala', 'Consenso all\'ecografia', 'ok', 'Firmato sul tablet'], ['Roberta Lai', 'Referto eco tiroide', 'ok', 'Nell\'area del paziente'], ['Maria Piras', 'Privacy e consenso', 'prep', 'Da firmare'], ['Luca Orrù', 'Impegnativa', 'ok', 'Caricata']] },
+        { id: 'sts', l: 'Sistema TS', cols: ['Fattura', 'Paziente', 'Stato'], rows: [['FS 412', 'Roberta Lai', 'ok', 'Inviata al Sistema TS'], ['FS 413', 'Stefano Corda', 'ok', 'Inviata al Sistema TS'], ['FS 414', 'Giovanni Pala', 'prep', 'Da inviare'], ['FS 398', 'Anna Keller', 'bad', 'Opposizione del paziente']] }
+      ],
+      cust: ['Giovanni Pala', 'Roberta Lai', 'Maria Piras', 'Luca Orrù', 'Ilaria Mereu', 'Stefano Corda'],
+      prod: [['Ecografia addome', 90, 0, 0], ['Visita specialistica', 120, 0, 0], ['Gel per ecografia', 6, 14, 10], ['Teli monouso ×100', 18, 4, 6], ['Fisioterapia', 50, 0, 0], ['Certificato', 40, 0, 0]],
+      ch: ['Segreteria', 'Prenota online', 'Telefono', 'WhatsApp'] },
     logistica: { label: 'Logistica e servizi', co: 'Trasporti Campidano', desc: 'Consegne, interventi tecnici, squadre e mezzi da coordinare, con app per chi è in giro.', mods: ['Interventi', 'Squadre', 'Mezzi', 'App sul campo'],
       t: { orders: 'Spedizioni', one: 'Nuova spedizione', clients: 'Committenti', stock: 'Materiali e tariffe', docs: 'DDT e fatture', channels: 'Canali' },
       x: [
@@ -703,6 +714,47 @@
       // Esempi calcolati dal listino: [tipo, camere o alloggi, descrizione]
       examples: [['bb', 4, 'B&B con 4 camere'], ['bb', 10, 'Case vacanza, 10 alloggi'], ['hotel', 22, 'Albergo con 22 camere'], ['hotel', 40, 'Albergo con 40 camere']]
     },
+    /* ---------- famiglia Benessere: saloni per operatore (con un minimo), spa per accessi contemporanei ---------- */
+    // Proposta di Marco del 5/11/2026. extra: ogni persona in più (reception o staff oltre quelli inclusi).
+    ben: {
+      extra: 12,
+      saloni: { id: 'saloni', name: 'Saloni ed estetica', for: 'Parrucchieri, barbieri, estetiste, nail e lash', rate: 12, min: 39, maxUnits: 30 },
+      spa: [
+        { id: 'piccola', name: 'Piccola spa', for: 'Fino a 8 accessi contemporanei', fino: 8, base: 49, inc: 3 },
+        { id: 'media', name: 'Spa media', for: 'Fino a 20 accessi contemporanei', fino: 20, base: 89, inc: 6 },
+        { id: 'grande', name: 'Grande spa', for: 'Fino a 40 accessi contemporanei', fino: 40, base: 129, inc: 10 }
+      ],
+      feat: [
+        'Agenda per operatore, cabina e poltrona',
+        'Prenotazione online dal telefono: si installa come un\'app, senza store',
+        'Promemoria automatici su WhatsApp e SMS, con «confermo» e «sposto»',
+        'Scheda cliente con lo storico: colori e formule, trattamenti, prodotti, foto prima e dopo (con consenso)',
+        'Pacchetti, abbonamenti e carte regalo',
+        'Per le spa: ingressi a fasce orarie con i posti contemporanei, percorsi e ingressi dei pacchetti',
+        'Prodotti in vendita e magazzino',
+        'Acconti e pagamenti online, fattura elettronica'
+      ],
+      // [tipo, operatori o accessi, persone in più o staff, descrizione]
+      examples: [['saloni', 1, 0, 'Barbiere da solo'], ['saloni', 4, 0, 'Salone con 4 operatori'], ['spa', 8, 3, 'Piccola spa, 3 persone'], ['spa', 20, 8, 'Spa media, 8 persone']]
+    },
+    /* ---------- famiglia Salute: per professionista con agenda, con un minimo al mese ---------- */
+    sal: {
+      maxUnits: 60, extra: 12, inc: 2,
+      types: [
+        { id: 'studi', name: 'Studi e professionisti', for: 'Medici, dentisti, fisioterapisti, psicologi, veterinari', rate: 29, min: 49 },
+        { id: 'poli', name: 'Poliambulatori e cliniche', for: 'Ambulatori con più specialità, cliniche, centri di riabilitazione', rate: 19, min: 199 }
+      ],
+      feat: [
+        'Agenda per professionista, stanza e apparecchio',
+        'Prenotazione online per i pazienti, dal sito e dal telefono, con le prestazioni e i prezzi che decidi tu',
+        'Promemoria su WhatsApp e SMS, con conferma e disdetta',
+        'Cartella del paziente: anamnesi, allergie, visite, piani di cura; odontogramma per i dentisti, schede degli animali per i veterinari',
+        'Consensi informati firmati sul tablet, referti e documenti nell\'area riservata del paziente',
+        'Fatture sanitarie con bollo e invio al Sistema Tessera Sanitaria',
+        'Dati sanitari cifrati, accessi registrati, server in Unione Europea'
+      ],
+      examples: [['studi', 1, 'Fisioterapista da solo'], ['studi', 2, 'Veterinari, 2 medici'], ['studi', 4, 'Studio dentistico, 4 professionisti'], ['poli', 15, 'Poliambulatorio, 15 professionisti']]
+    },
     /* ---------- moduli aggiuntivi a fasce (al mese; con l'annuale 10 mesi su 12) ---------- */
     tiers: [
       { id: 'piccolo', n: 'Piccolo', d: 'Strumenti semplici per il team', mods: [
@@ -713,9 +765,10 @@
         { id: 'chat', n: 'Chat del sito', d: 'Ti scrivono dal sito, rispondi da Maistu', p: 19 },
         { id: 'area', n: 'Area clienti', d: 'Ordini, documenti e pagamenti online', p: 19 },
         { id: 'jana', n: 'Jana', d: 'Comando vocale da telefono e computer', p: 19 },
-        { id: 'app', n: 'App sul campo', d: 'Per chi lavora fuori sede', p: 19 }] },
+        { id: 'app', n: 'App sul campo', d: 'Per chi lavora fuori sede', p: 19 },
+        { id: 'wa', n: 'Assistente WhatsApp', d: 'Prenota, sposta e disdice gli appuntamenti; messaggi al costo di Meta', p: 19 }] },
       { id: 'settore', n: 'Settore', d: 'Cucito sul tuo mestiere', mods: [
-        { id: 'settore', n: 'Modulo di settore', d: 'Tavoli, camere, pratiche, interventi…', dOs: 'Un altro settore accanto all\'ospitalità: ristorante, centro benessere…', p: 29 }] },
+        { id: 'settore', n: 'Modulo di settore', d: 'Tavoli, camere, pratiche, interventi…', dOs: 'Un altro settore accanto al tuo: ristorante, centro benessere, ambulatorio…', p: 29 }] },
       { id: 'grande', n: 'Grande', d: 'Collegamenti e automazioni avanzate', mods: [
         { id: 'market', n: 'Marketplace', d: 'Amazon, eBay e altri, sincronizzati', p: 39 },
         { id: 'aicore', n: 'AI CORE automazioni', d: 'Email, solleciti e preventivi in automatico', p: 49 }] }
@@ -725,13 +778,23 @@
   };
   var plansEl = $('#plans'), hPlansEl = $('#hPlans'), addonsEl = $('#addons'), usersIn = $('#users'), usersOut = $('#usersOut'), quoteEl = $('#quote');
   var hQuoteEl = $('#hQuote'), unitsIn = $('#units'), unitsOut = $('#unitsOut'), hUsersIn = $('#hUsers'), hUsersOut = $('#hUsersOut');
-  var fam = 'az', bill = 'm', size = 'micro', hType = 'bb', addOn = {}, shown = {};
+  var bPlansEl = $('#bPlans'), bQuoteEl = $('#bQuote'), bUnitsIn = $('#bUnits'), bUnitsOut = $('#bUnitsOut'), bUsersIn = $('#bUsers'), bUsersOut = $('#bUsersOut');
+  var sPlansEl = $('#sPlans'), sQuoteEl = $('#sQuote'), sUnitsIn = $('#sUnits'), sUnitsOut = $('#sUnitsOut'), sUsersIn = $('#sUsers'), sUsersOut = $('#sUsersOut');
+  var fam = 'az', bill = 'm', size = 'micro', hType = 'bb', bType = 'saloni', sType = 'studi', addOn = {}, shown = {};
   function allMods() { var a = []; PRICING.tiers.forEach(function (t) { a = a.concat(t.mods); }); return a.concat([PRICING.custom]); }
   function hTypeOf(id) { return PRICING.hosp.types.filter(function (t) { return t.id === id; })[0]; }
   function planMonthly(pl, users) { return pl.base + Math.max(0, users - pl.inc) * pl.extra; }
   // Parte camere/alloggi: tariffa per unità, con il minimo mensile.
   function roomsMonthly(t, n) { return Math.max(t.rate * n, t.min); }
   function hospMonthly(t, n, users) { return roomsMonthly(t, n) + Math.max(0, users - t.inc) * PRICING.hosp.extra; }
+  // Benessere: saloni per operatore con il minimo (la reception si paga a parte); spa per misura, con lo staff incluso.
+  function salonMonthly(n, reception) { var S = PRICING.ben.saloni; return Math.max(S.rate * n, S.min) + reception * PRICING.ben.extra; }
+  function spaMonthly(t, staff) { return t.base + Math.max(0, staff - t.inc) * PRICING.ben.extra; }
+  function spaFor(n) { return PRICING.ben.spa.filter(function (t) { return n <= t.fino; })[0]; }
+  // Salute: per professionista con il minimo; segreteria inclusa fino a sal.inc persone.
+  function salTypeOf(id) { return PRICING.sal.types.filter(function (t) { return t.id === id; })[0]; }
+  function proMonthly(t, n) { return Math.max(t.rate * n, t.min); }
+  function salMonthly(t, n, segr) { return proMonthly(t, n) + Math.max(0, segr - PRICING.sal.inc) * PRICING.sal.extra; }
   // Moduli scelti, al mese, esclusi quelli già compresi nel piano.
   function addonsMonthly(incl) { incl = incl || []; return allMods().reduce(function (a, x) { return a + (addOn[x.id] && incl.indexOf(x.id) < 0 ? x.p : 0); }, 0); }
   function inclChosen(incl) { return allMods().filter(function (x) { return addOn[x.id] && (incl || []).indexOf(x.id) > -1; }).map(function (x) { return x.n; }); }
@@ -799,7 +862,56 @@
     }).join('');
     animatePrices(hPlansEl);
   }
-  function renderAll() { renderPlans(); renderHosp(); }
+  function card(id, name, forTxt, per, sub, ul, reco, badge) {
+    return '<article class="plan' + (reco ? ' reco' : '') + '" data-plan-id="' + id + '"><span class="badge">' + badge + '</span><h3>' + esc(name) + '</h3><p class="for">' + forTxt + '</p>' +
+      priceHtml(per) + '<p class="price-sub">' + sub + '</p><ul>' + ul.map(function (x) { return '<li><span>' + x + '</span></li>'; }).join('') + '</ul>' +
+      '<a class="btn ' + (reco ? 'btn-or' : 'btn-ghost') + '" href="#contatti" data-tipo="Preventivo piani cloud" data-plan="' + id + '">Scegli ' + esc(name) + '</a></article>';
+  }
+  function renderBen() {
+    if (!bPlansEl) return;
+    var B = PRICING.ben, spa = bType === 'spa', raw = +bUnitsIn.value, ao = addonsMonthly([]), extraTxt = eur(B.extra, 0);
+    var max = spa ? B.spa[B.spa.length - 1].fino : B.saloni.maxUnits, over = raw > max, n = Math.min(raw, max), u = +bUsersIn.value;
+    $('#bUnitsL').textContent = spa ? 'Accessi contemporanei' : 'Operatori in agenda';
+    $('#bUsersL').textContent = spa ? 'Persone dello staff che usano Maistu' : 'Persone alla reception';
+    bUsersIn.min = spa ? 1 : 0; if (spa && +bUsersIn.value < 1) bUsersIn.value = 1; u = +bUsersIn.value;
+    setRange(bUnitsIn, bUnitsOut, over ? max + '+' : String(n));
+    bUnitsIn.setAttribute('aria-valuetext', over ? 'più di ' + max : String(n));
+    setRange(bUsersIn, bUsersOut, String(u));
+    bQuoteEl.hidden = !over;
+    if (over) $('#bQuoteT').textContent = spa ? 'Oltre ' + max + ' accessi contemporanei prepariamo un\'offerta dedicata.' : 'Oltre ' + max + ' operatori prepariamo un\'offerta dedicata.';
+    bPlansEl.classList.toggle('dim', over);
+    bPlansEl.classList.toggle('plans-1', !spa);
+    bPlansEl.parentElement.classList.toggle('hosp-larga', spa);  // tre misure: le schede a tutta larghezza, «Sempre incluso» sotto
+    if (!spa) {
+      var S = B.saloni, ops = S.rate * n, b = billing(salonMonthly(n, u) + ao);
+      bPlansEl.innerHTML = card('b-saloni', S.name, S.for, b.per, b.sub + (u ? ' · ' + u + ' alla reception, ' + extraTxt + ' l\'una' : '') + (ao ? ' · moduli aggiuntivi compresi' : ''),
+        ['<b>' + eur(S.rate, 0) + ' al mese per operatore</b>, minimo ' + eur(S.min, 0) + ' al mese', n + ' ' + (n === 1 ? 'operatore' : 'operatori') + ' × ' + eur(S.rate, 0) + ' = ' + eur(ops, 0) + (ops < S.min ? ': si applica il minimo di ' + eur(S.min, 0) : ''), 'Ogni operatore ha il suo accesso; reception ' + extraTxt + ' al mese a persona', 'Tutto quello che trovi in «Sempre incluso»'], !over, 'Per il tuo salone');
+    } else {
+      var mis = spaFor(n);
+      bPlansEl.innerHTML = B.spa.map(function (t) {
+        var b = billing(spaMonthly(t, u) + ao);
+        return card('b-' + t.id, t.name, t.for, b.per, b.sub + ' · ' + t.inc + ' persone dello staff incluse, poi ' + extraTxt + ' l\'una' + (ao ? ' · moduli aggiuntivi compresi' : ''),
+          ['<b>' + eur(t.base, 0) + ' al mese</b> fino a ' + t.fino + ' accessi contemporanei', 'Con ' + u + (u === 1 ? ' persona' : ' persone') + ' dello staff', 'Tutto quello che trovi in «Sempre incluso»'], !over && mis === t, 'La tua misura');
+      }).join('');
+    }
+    animatePrices(bPlansEl);
+  }
+  function renderSal() {
+    if (!sPlansEl) return;
+    var H = PRICING.sal, raw = +sUnitsIn.value, over = raw > H.maxUnits, n = Math.min(raw, H.maxUnits), u = +sUsersIn.value, ao = addonsMonthly([]);
+    setRange(sUnitsIn, sUnitsOut, over ? H.maxUnits + '+' : String(n));
+    sUnitsIn.setAttribute('aria-valuetext', over ? 'più di ' + H.maxUnits : String(n));
+    setRange(sUsersIn, sUsersOut, String(u));
+    sQuoteEl.hidden = !over;
+    sPlansEl.classList.toggle('dim', over);
+    sPlansEl.innerHTML = H.types.map(function (t) {
+      var pro = t.rate * n, b = billing(salMonthly(t, n, u) + ao);
+      return card('s-' + t.id, t.name, t.for, b.per, b.sub + ' · ' + H.inc + ' persone in segreteria incluse, poi ' + eur(H.extra, 0) + ' l\'una' + (ao ? ' · moduli aggiuntivi compresi' : ''),
+        ['<b>' + eur(t.rate, 0) + ' al mese per professionista</b>, minimo ' + eur(t.min, 0) + ' al mese', n + ' × ' + eur(t.rate, 0) + ' = ' + eur(pro, 0) + (pro < t.min ? ': si applica il minimo di ' + eur(t.min, 0) : ''), 'Tutto quello che trovi in «Sempre incluso»'], !over && t.id === sType, 'Per il tuo studio');
+    }).join('');
+    animatePrices(sPlansEl);
+  }
+  function renderAll() { renderPlans(); renderHosp(); renderBen(); renderSal(); }
   // Gruppo di scelte (role=radio): clic, frecce, Home/Fine; solo la scelta attiva entra nel giro del Tab.
   function radioGroup(group, attr, onPick) {
     var btns = $$('[role=radio]', group);
@@ -828,7 +940,7 @@
       if (on && focus) t.focus();
     });
     var s = $('[data-a="settore"] .ad', addonsEl), m = PRICING.tiers[2].mods[0];
-    if (s) s.textContent = f === 'os' ? m.dOs : m.d;
+    if (s) s.textContent = f === 'az' ? m.d : m.dOs;
     store.set('maistu-famiglia', f, true);
   }
   if (plansEl) {
@@ -837,6 +949,12 @@
       $$('[data-pr="osp-' + t.id + '"]').forEach(function (el) { el.textContent = eur(t.rate, 0) + ' al mese per ' + t.per + (t.id === 'bb' ? ' per B&B e case vacanza' : ' per gli alberghi') + ' (minimo ' + eur(t.min, 0) + ')'; });
     });
     unitsIn.max = PRICING.hosp.maxUnits + 1;
+    var S0 = PRICING.ben.saloni;
+    $$('[data-pr="be-saloni"]').forEach(function (el) { el.textContent = eur(S0.rate, 0) + ' al mese per operatore per saloni ed estetica (minimo ' + eur(S0.min, 0) + ')'; });
+    $$('[data-pr="be-spa"]').forEach(function (el) { el.textContent = PRICING.ben.spa.map(function (t) { return t.name.toLowerCase() + ' fino a ' + t.fino + ' accessi ' + eur(t.base, 0); }).join(', '); });
+    PRICING.sal.types.forEach(function (t) {
+      $$('[data-pr="sa-' + t.id + '"]').forEach(function (el) { el.textContent = eur(t.rate, 0) + ' al mese per ' + t.name.toLowerCase() + ' (minimo ' + eur(t.min, 0) + ')'; });
+    });
     var btn = function (a) { return '<button type="button" class="addon" aria-pressed="false" data-a="' + a.id + '"><span class="an">' + a.n + '</span><span class="ap">+ ' + eur(a.p, 0) + '/mese</span><span class="ad">' + a.d + '</span></button>'; };
     addonsEl.innerHTML = PRICING.tiers.map(function (t) {
       var ps = t.mods.map(function (m) { return m.p; }), lo = Math.min.apply(null, ps), hi = Math.max.apply(null, ps);
@@ -847,6 +965,36 @@
       '<button type="button" class="addon addon-custom" aria-pressed="false" data-a="custom"><span class="ac-l"><span class="an">' + PRICING.custom.n + '</span><span class="ap">da ' + eur(PRICING.custom.p, 0) + '/mese</span><span class="ad">' + PRICING.custom.d + '</span></span><span class="ac-r">' + PRICING.custom.note + '</span></button>';
     addonsEl.addEventListener('click', function (e) { var b = e.target.closest('.addon'); if (!b) return; var id = b.getAttribute('data-a'); addOn[id] = !addOn[id]; b.setAttribute('aria-pressed', String(addOn[id])); renderAll(); });
     usersIn.addEventListener('input', renderPlans);
+    bUnitsIn.addEventListener('input', renderBen);
+    bUsersIn.addEventListener('input', renderBen);
+    sUnitsIn.addEventListener('input', renderSal);
+    sUsersIn.addEventListener('input', renderSal);
+    var pickB = radioGroup($('#bType'), 'data-b', function (v) {
+      // Cambiando tipo il cursore riparte da un valore sensato: 4 operatori o 12 accessi; la reception da zero, lo staff da 3.
+      if (v !== bType) { bUnitsIn.value = v === 'spa' ? 12 : 4; bUsersIn.value = v === 'spa' ? 3 : 0; }
+      bType = v; bUnitsIn.max = (v === 'spa' ? PRICING.ben.spa[PRICING.ben.spa.length - 1].fino : PRICING.ben.saloni.maxUnits) + 1; renderBen();
+    });
+    var pickS = radioGroup($('#sType'), 'data-s', function (v) { sType = v; renderSal(); });
+    sUnitsIn.max = PRICING.sal.maxUnits + 1;
+    $('#bInc').innerHTML = PRICING.ben.feat.map(function (f) { return '<li>' + f + '</li>'; }).join('');
+    $('#sInc').innerHTML = PRICING.sal.feat.map(function (f) { return '<li>' + f + '</li>'; }).join('');
+    $('#bEx').innerHTML = PRICING.ben.examples.map(function (x) {
+      var spa = x[0] === 'spa', m = spa ? spaMonthly(spaFor(x[1]), x[2]) : salonMonthly(x[1], x[2]);
+      return '<button type="button" class="ex" data-ex-t="' + x[0] + '" data-ex-n="' + x[1] + '" data-ex-u="' + x[2] + '"><span>' + esc(x[3]) + '</span><b>' + eur(m, 0) + '</b><small>' + (spa ? spaFor(x[1]).name.toLowerCase() : (x[1] * PRICING.ben.saloni.rate < PRICING.ben.saloni.min ? 'il minimo' : x[1] + ' × ' + eur(PRICING.ben.saloni.rate, 0))) + '</small></button>';
+    }).join('');
+    $('#bEx').addEventListener('click', function (e) {
+      var b = e.target.closest('.ex'); if (!b) return;
+      pickB(b.getAttribute('data-ex-t')); bUnitsIn.value = b.getAttribute('data-ex-n'); bUsersIn.value = b.getAttribute('data-ex-u'); renderBen();
+    });
+    $('#sEx').innerHTML = PRICING.sal.examples.map(function (x) {
+      var t = salTypeOf(x[0]), m = proMonthly(t, x[1]);
+      return '<button type="button" class="ex" data-ex-t="' + x[0] + '" data-ex-n="' + x[1] + '"><span>' + esc(x[2]) + '</span><b>' + eur(m, 0) + '</b><small>' + (t.rate * x[1] < t.min ? 'il minimo' : x[1] + ' × ' + eur(t.rate, 0)) + '</small></button>';
+    }).join('');
+    $('#sEx').addEventListener('click', function (e) {
+      var b = e.target.closest('.ex'); if (!b) return;
+      sUnitsIn.value = b.getAttribute('data-ex-n'); pickS(b.getAttribute('data-ex-t')); renderSal();
+    });
+    $$('[data-pr="extra"]').forEach(function (el) { el.textContent = PRICING.ben.extra; });
     unitsIn.addEventListener('input', renderHosp);
     hUsersIn.addEventListener('input', renderHosp);
     radioGroup($('#billing'), 'data-bill', function (v) { bill = v; renderAll(); });
@@ -873,7 +1021,8 @@
         e.preventDefault(); setFam(tabs[(j + tabs.length) % tabs.length].getAttribute('data-fam'), true);
       });
     });
-    setFam(location.hash === '#ospitalita' || store.get('maistu-famiglia', true) === 'os' ? 'os' : 'az');
+    var famDaHash = { '#ospitalita': 'os', '#benessere': 'be', '#salute': 'sa' }[location.hash], famSalvata = store.get('maistu-famiglia', true);
+    setFam(famDaHash || (['os', 'be', 'sa'].indexOf(famSalvata) > -1 ? famSalvata : 'az'));
     renderAll();
   }
   // I pulsanti di piani, quotazioni e moduli precompilano il modulo contatti.
@@ -886,7 +1035,17 @@
     if (msg && id && (!msg.value || msg.value === autoMsg)) {
       var extras = allMods().filter(function (x) { return addOn[x.id]; }).map(function (x) { return x.n; });
       var tail = ', fatturazione ' + (bill === 'y' ? 'annuale' : 'mensile') + (extras.length ? ', con ' + extras.join(', ') : '') + '.';
-      if (id.indexOf('h-') === 0) {
+      if (id.indexOf('b-') === 0) {
+        var bn = +bUnitsIn.value, bu = +bUsersIn.value;
+        msg.value = bType === 'spa'
+          ? 'Piano Benessere «' + PRICING.ben.spa.filter(function (x) { return 'b-' + x.id === id; })[0].name + '», ' + bn + ' accessi contemporanei, ' + bu + ' persone dello staff' + tail
+          : 'Piano Benessere «Saloni ed estetica», ' + bn + (bn === 1 ? ' operatore' : ' operatori') + (bu ? ', ' + bu + ' alla reception' : '') + tail;
+        var fb = $('#f-settore'); if (fb && !fb.value) fb.value = 'Bellezza e benessere';
+      } else if (id.indexOf('s-') === 0) {
+        var st = salTypeOf(id.slice(2));
+        msg.value = 'Piano Salute «' + st.name + '», ' + sUnitsIn.value + ' professionisti, ' + sUsersIn.value + ' in segreteria' + tail;
+        var fsa = $('#f-settore'); if (fsa && !fsa.value) fsa.value = 'Studi medici e salute';
+      } else if (id.indexOf('h-') === 0) {
         var t = hTypeOf(id.slice(2)), n = +unitsIn.value;
         var nTxt = n > PRICING.hosp.maxUnits ? 'più di ' + PRICING.hosp.maxUnits + ' ' + t.unit[1] : n + ' ' + unitWord(t, n);
         msg.value = 'Piano Ospitalità «' + t.name + '», ' + nTxt + ', ' + hUsersIn.value + ' utenti' + tail;
